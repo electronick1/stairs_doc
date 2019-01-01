@@ -1,0 +1,23 @@
+
+<svg width="240px" height="206px" viewBox="0 0 240 206" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.000000, -3.000000)">
+            <path d="M25.8581734,51.7521843 C30.7096162,51.6086984 35.7191286,52.3408563 40.4125019,51.3217264 C55.0741539,48.1380615 54.9363692,30.9133363 37.311987,25.594176 C26.2610646,22.2589312 14.8453224,33.6850866 17.3489131,41.9182695 C19.1084168,47.7044848 25.9402634,50.9228506 31.9001224,53" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+            <path d="M25.8581734,179.263054 C30.7096162,179.119568 35.7191286,179.851726 40.4125019,178.832596 C55.0741539,175.648931 54.9363692,158.424206 37.311987,153.105046 C26.2610646,149.769801 14.8453224,161.195956 17.3489131,169.429139 C19.1084168,175.215354 25.9402634,178.43372 31.9001224,180.51087" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+            <path id="Line" d="M34.548848,67.0027328 L34.9999917,145.491379 L35.0028656,145.991371 L34.0028822,145.997119 L34.0000083,145.497127 L33.5488645,67.0084806 L29.5489306,67.0314718 L33.9971261,58.0057554 L38.5487819,66.9797417 L34.548848,67.0027328 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M103.422466,96.0364792 L56.1294573,43.8357054 L55.7937519,43.4651627 L56.5348373,42.7937519 L56.8705427,43.1642946 L104.163551,95.3650684 L107.127893,92.6794255 L109.835705,102.370543 L100.458124,98.7221221 L103.422466,96.0364792 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M101.270658,116.219671 L56.8758796,166.829719 L56.5461606,167.205598 L55.7944015,166.546161 L56.1241204,166.170281 L100.518899,115.560234 L97.5118625,112.922482 L106.829719,109.12412 L104.277695,118.857423 L101.270658,116.219671 Z" fill="#979797" fill-rule="nonzero"></path>
+            <text id="second_step" font-family="PTSans-Regular, PT Sans" font-size="15" font-weight="normal" fill="#000000">
+                <tspan x="0" y="13.9833833">second_step</tspan>
+            </text>
+            <text id="{first_step:-result_" font-family="PTSans-Regular, PT Sans" font-size="10" font-weight="normal" fill="#000000">
+                <tspan x="122" y="99">{first_step: result_data,</tspan>
+                <tspan x="122" y="111"> second_step: result_data}</tspan>
+            </text>
+            <rect id="Rectangle" stroke="#4A90E2" x="116.5" y="86.5" width="123" height="39" rx="8"></rect>
+            <text id="first_step" font-family="PTSans-Regular, PT Sans" font-size="15" font-weight="normal" fill="#000000">
+                <tspan x="0" y="205">first_step</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

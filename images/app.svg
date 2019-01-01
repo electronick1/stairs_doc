@@ -1,0 +1,24 @@
+
+<svg width="227px" height="215px" viewBox="0 0 227 215" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(1.000000, 0.000000)">
+            <text id="producers.py" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="65" y="158">producers.py</tspan>
+            </text>
+            <text id="pipelines.py" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="65" y="83">pipelines.py</tspan>
+            </text>
+            <text id="flows.py" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="79" y="122">flows.py</tspan>
+            </text>
+            <text id="consumers.py" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="65" y="194">consumers.py</tspan>
+            </text>
+            <rect id="Rectangle" stroke="#4A90E2" stroke-width="3" x="1.5" y="1.5" width="222" height="212" rx="8"></rect>
+            <text id="App" font-family="PTSans-Regular, PT Sans" font-size="25" font-weight="normal" fill="#FFFFFF">
+                <tspan x="89" y="27">App</tspan>
+            </text>
+            <path d="M0,38.5 L225,38.5" id="Line" stroke="#4A90E2" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>
