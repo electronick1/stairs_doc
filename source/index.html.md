@@ -52,7 +52,7 @@ You must install <code>redis</code> for stairs.
 
 ## Data Pipelines
 
-> ![image](images/data_pipeline.png)
+<!-- > ![image](images/data_pipeline.png) -->
 
 The main Stairs focus is data pipelines. It's a framework which helps you 
 build and manipulation of data through the data flow graph. 
@@ -65,7 +65,7 @@ and easily understand what's going on in your system.
 
 ## Parallel/Async/Distributed
 
-> ![parallel](images/parallel.png)
+<!-- > ![parallel](images/parallel.png) -->
 
 Each component of stairs data pipeline could be a "worker" - separate process which allows you
 to process data in a parallel way. 
@@ -77,7 +77,7 @@ Stairs framework focusing on speed and light, and speed of your "workers" mostly
 
 ## For data-science and data-engineering with love
 
-> ![ds_en](images/ds_en.svg)
+<!-- > ![ds_en](images/ds_en.svg) -->
 
 Data-science and data-engineering growing  fast, and it's  hard to be expert on everything
 in the same time. 
