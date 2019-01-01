@@ -24,6 +24,59 @@ under the License.
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
 
+.stairs{
+   width: 80%;
+   margin-left: 10%;
+   margin-top: 100px;
+}
+
+.logo{
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+.data_pipeline{
+    border: 0;
+    margin-top: 500px;
+    margin-left: 10%;
+    height: 180px;
+}
+
+.parallel{
+    width: 90%;
+    margin-top: 90px;
+    height: 180px;
+    margin-left: 5%;
+}
+
+.ds_en{
+    margin-top: 170px;
+    width: 60%;
+    margin-left: 10%;
+}
+
+.project_structure{
+   height: 250px;
+   margin-top: 280px;
+   margin-left: 10%;
+   padding-right: 150px;
+}
+
+.app{
+    height: 250px;
+    margin-top: 220px;
+    margin-left: 10%;
+    padding-right: 150px;
+}
+
+.content hr {
+    border-bottom: 1px solid #F3F7F9 !important;
+    border-top: 1px solid #2E3336 !important;
+}
+
+
+
+
 html, body {
   color: $main-text;
   padding: 0;

@@ -1,0 +1,99 @@
+
+<svg width="341px" height="625px" viewBox="0 0 341 625" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(0.000000, -1.000000)">
+            <rect id="Rectangle" stroke="#4A90E2" x="0.5" y="14.5" width="102" height="32" rx="8"></rect>
+            <rect id="Rectangle" stroke="#4A90E2" x="112.5" y="359.5" width="96" height="26" rx="8"></rect>
+            <rect id="Rectangle" stroke="#4A90E2" x="119.5" y="14.5" width="102" height="32" rx="8"></rect>
+            <rect id="Rectangle" stroke="#4A90E2" x="115.5" y="94.5" width="105" height="52" rx="8"></rect>
+            <rect id="Rectangle" stroke="#4A90E2" x="112.5" y="269" width="84" height="35" rx="8"></rect>
+            <text id="data_point1:-value1," font-family="PTSans-Regular, PT Sans" font-size="10" font-weight="normal" fill="#000000">
+                <tspan x="120" y="110"> data_point1: value1,</tspan>
+                <tspan x="120" y="122"> data_point2: value2,</tspan>
+                <tspan x="120" y="134"> data_point3: value3</tspan>
+            </text>
+            <text id="result1:-data1,-resu" font-family="PTSans-Regular, PT Sans" font-size="10" font-weight="normal" fill="#000000">
+                <tspan x="120" y="285"> result1: data1,</tspan>
+                <tspan x="120" y="297"> result2: data2</tspan>
+            </text>
+            <text id="result1:-data1,-resu" font-family="PTSans-Regular, PT Sans" font-size="10" font-weight="normal" fill="#000000">
+                <tspan x="117" y="523"> result1: data1,</tspan>
+                <tspan x="117" y="535"> result2: data2</tspan>
+            </text>
+            <rect id="Rectangle" stroke="#4A90E2" x="238.5" y="14.5" width="102" height="32" rx="8"></rect>
+            <text id="value1" font-family="PTSans-Regular, PT Sans" font-size="15" font-weight="normal" fill="#000000">
+                <tspan x="30" y="34">value1</tspan>
+            </text>
+            <text id="value2" font-family="PTSans-Regular, PT Sans" font-size="15" font-weight="normal" fill="#000000">
+                <tspan x="149" y="34">value2</tspan>
+            </text>
+            <text id="value3" font-family="PTSans-Regular, PT Sans" font-size="15" font-weight="normal" fill="#000000">
+                <tspan x="268" y="34">value3</tspan>
+            </text>
+            <path id="Line" d="M103.865601,82.7295961 L46.2526508,49.9345324 L45.8181184,49.6871832 L46.3128168,48.8181184 L46.7473492,49.0654676 L104.360299,81.8605314 L106.339093,78.3842724 L111.934532,86.7473492 L101.886807,86.205855 L103.865601,82.7295961 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M167,72 L167,47.5 L167,47 L168,47 L168,47.5 L168,72 L172,72 L167.5,81 L163,72 L167,72 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M164,176 L164,151.5 L164,151 L165,151 L165,151.5 L165,176 L169,176 L164.5,185 L160,176 L164,176 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M161,415 L161,390.5 L161,390 L162,390 L162,390.5 L162,415 L166,415 L161.5,424 L157,415 L161,415 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M154,575 L154,550.5 L154,550 L155,550 L155,550.5 L155,575 L159,575 L154.5,584 L150,575 L154,575 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M162,336 L162,311.5 L162,311 L163,311 L163,311.5 L163,336 L167,336 L162.5,345 L158,336 L162,336 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M164,260 L164,244.26949 L164,243.76949 L164.5,243.76949 L254,243.76949 L254,212.5 L254,212 L255,212 L255,212.5 L255,244.26949 L255,244.76949 L254.5,244.76949 L165,244.76949 L165,260 L169,260 L164.5,269 L160,260 L164,260 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M159.5,492.5 L159.5,476.76949 L159.5,476.26949 L160,476.26949 L249.5,476.26949 L249.5,445 L249.5,444.5 L250.5,444.5 L250.5,445 L250.5,476.76949 L250.5,477.26949 L250,477.26949 L160.5,477.26949 L160.5,492.5 L164.5,492.5 L160,501.5 L155.5,492.5 L159.5,492.5 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M229.294076,82.1072268 L292.267645,49.0572687 L292.710376,48.8249133 L293.175087,49.7103758 L292.732355,49.9427313 L229.758787,82.9926893 L231.61763,86.5345393 L221.557269,86.7323554 L227.435233,78.5653767 L229.294076,82.1072268 Z" fill="#979797" fill-rule="nonzero"></path>
+            <text id="DataPoint" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="35" y="7.5">DataPoint</tspan>
+            </text>
+            <text id="DataPoint" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="146" y="357">DataPoint</tspan>
+            </text>
+            <text id="DataPoint" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="151" y="8">DataPoint</tspan>
+            </text>
+            <text id="DataPoint" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="273" y="7.5">DataPoint</tspan>
+            </text>
+            <text id="DataFrame" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="151" y="91.5">DataFrame</tspan>
+            </text>
+            <text id="MyFlow2" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="148" y="437">MyFlow2</tspan>
+            </text>
+            <text id="DataFrame" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="117" y="264">DataFrame</tspan>
+            </text>
+            <text id="DataFrame" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="113" y="503">DataFrame</tspan>
+            </text>
+            <text id="DataFrame" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="108" y="582">DataFrame</tspan>
+            </text>
+            <text id="get(result1)" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="172" y="330">get(result1)</tspan>
+            </text>
+            <text id="make(…)" font-family="PTSans-Regular, PT Sans" font-size="8" font-weight="normal" fill="#000000">
+                <tspan x="162" y="565">make(…)</tspan>
+            </text>
+            <text id="result1" font-family="PTSans-Regular, PT Sans" font-size="10" font-weight="normal" fill="#000000">
+                <tspan x="146" y="375">result1</tspan>
+            </text>
+            <rect id="Rectangle" stroke="#4A90E2" x="104.5" y="508" width="84" height="35" rx="8"></rect>
+            <rect id="Rectangle" stroke="#4A90E2" x="103.5" y="590.5" width="84" height="35" rx="8"></rect>
+            <text id="result:-data1" font-family="PTSans-Regular, PT Sans" font-size="10" font-weight="normal" fill="#000000">
+                <tspan x="116" y="612">result: data1</tspan>
+            </text>
+        </g>
+        <g id="Group" transform="translate(168.000000, 214.500000) rotate(90.000000) translate(-168.000000, -214.500000) translate(159.500000, 138.500000)">
+            <path d="M5.40801766,87.2423976 C7.54836009,87.1552811 9.75843907,87.5998056 11.8290449,86.9810482 C18.2974208,85.0481087 18.2366335,74.5902399 10.4611707,71.3607497 C5.58576377,69.3357797 0.549406923,76.2730883 1.65393227,81.2718065 C2.43018387,84.7848658 5.44423387,86.7388736 8.07358342,88" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+            <path d="M5.40801766,151.242398 C7.54836009,151.155281 9.75843907,151.599806 11.8290449,150.981048 C18.2974208,149.048109 18.2366335,138.59024 10.4611707,135.36075 C5.58576377,133.33578 0.549406923,140.273088 1.65393227,145.271807 C2.43018387,148.784866 5.44423387,150.738874 8.07358342,152" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+            <path id="Line" d="M10.3713652,103.491991 L10.749949,129.992858 L10.7570911,130.492807 L9.75719314,130.507091 L9.75005101,130.007142 L9.3714672,103.506275 L5.3718753,103.563412 L9.74285787,94.500051 L14.3709571,103.434854 L10.3713652,103.491991 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M9.37136517,26.4919907 L9.74994899,52.9928579 L9.75709112,53.4928069 L8.75719314,53.5070911 L8.75005101,53.0071421 L8.3714672,26.5062749 L4.3718753,26.5634119 L8.74285787,17.500051 L13.3709571,26.4348536 L9.37136517,26.4919907 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path d="M4.40801766,16.2423976 C6.54836009,16.1552811 8.75843907,16.5998056 10.8290449,15.9810482 C17.2974208,14.0481087 17.2366335,3.5902399 9.46117072,0.360749701 C4.58576377,-1.66422032 -0.450593077,5.27308826 0.653932271,10.2718065 C1.43018387,13.7848658 4.44423387,15.7388736 7.07358342,17" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+        </g>
+        <g id="Group" transform="translate(165.000000, 450.500000) rotate(90.000000) translate(-165.000000, -450.500000) translate(156.500000, 374.500000)">
+            <path d="M5.40801766,87.2423976 C7.54836009,87.1552811 9.75843907,87.5998056 11.8290449,86.9810482 C18.2974208,85.0481087 18.2366335,74.5902399 10.4611707,71.3607497 C5.58576377,69.3357797 0.549406923,76.2730883 1.65393227,81.2718065 C2.43018387,84.7848658 5.44423387,86.7388736 8.07358342,88" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+            <path d="M5.40801766,151.242398 C7.54836009,151.155281 9.75843907,151.599806 11.8290449,150.981048 C18.2974208,149.048109 18.2366335,138.59024 10.4611707,135.36075 C5.58576377,133.33578 0.549406923,140.273088 1.65393227,145.271807 C2.43018387,148.784866 5.44423387,150.738874 8.07358342,152" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+            <path id="Line" d="M10.3713652,103.491991 L10.749949,129.992858 L10.7570911,130.492807 L9.75719314,130.507091 L9.75005101,130.007142 L9.3714672,103.506275 L5.3718753,103.563412 L9.74285787,94.500051 L14.3709571,103.434854 L10.3713652,103.491991 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path id="Line" d="M9.37136517,26.4919907 L9.74994899,52.9928579 L9.75709112,53.4928069 L8.75719314,53.5070911 L8.75005101,53.0071421 L8.3714672,26.5062749 L4.3718753,26.5634119 L8.74285787,17.500051 L13.3709571,26.4348536 L9.37136517,26.4919907 Z" fill="#979797" fill-rule="nonzero"></path>
+            <path d="M4.40801766,16.2423976 C6.54836009,16.1552811 8.75843907,16.5998056 10.8290449,15.9810482 C17.2974208,14.0481087 17.2366335,3.5902399 9.46117072,0.360749701 C4.58576377,-1.66422032 -0.450593077,5.27308826 0.653932271,10.2718065 C1.43018387,13.7848658 4.44423387,15.7388736 7.07358342,17" id="Path" stroke="#4A90E2" stroke-width="6" fill="#4A4A4A"></path>
+        </g>
+    </g>
+</svg>
