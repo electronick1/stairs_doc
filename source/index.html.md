@@ -39,7 +39,7 @@ pip install stairs-project
 
 > It's recommend to use latest python 3 version
 
-Just make `pip install stairs-project` to install all python dependenses.
+Just make `pip install stairsapp` to install all python dependenses.
 
 Stairs require redis, for storing statistic and some meta information, 
 even tho you will use different streaming/queue service. 
@@ -52,7 +52,7 @@ You must install <code>redis</code> for stairs.
 
 ## Data Pipelines
 
-> ![image](source/images/data_pipeline.png)
+> ![image](images/data_pipeline.png)
 
 The main Stairs focus is data pipelines. It's a framework which helps you 
 build and manipulation of data through the data flow graph. 
@@ -65,7 +65,7 @@ and easily understand what's going on in your system.
 
 ## Parallel/Async/Distributed
 
-> ![parallel](source/images/parallel.png)
+> ![parallel](images/parallel.png)
 
 Each component of stairs data pipeline could be a "worker" - separate process which allows you
 to process data in a parallel way. 
@@ -77,7 +77,7 @@ Stairs framework focusing on speed and light, and speed of your "workers" mostly
 
 ## For data-science and data-engineering with love
 
-> ![ds_en](source/images/ds_en.svg)
+> ![ds_en](images/ds_en.svg)
 
 Data-science and data-engineering growing  fast, and it's  hard to be expert on everything
 in the same time. 
@@ -102,7 +102,7 @@ Data pipeline paradigm allows you to separate this two subjects, and speed up wo
 stairs-admin project:new name
 ```
 
-> ![project](source/images/project.svg)
+> ![project](images/project.svg)
 
 
 
@@ -131,7 +131,7 @@ stairs-admin app:new name
 ```
 
 
-> ![app](source/images/app.svg)
+> ![app](images/app.svg)
 
 
 App - it's a way to generalize different approaches to one similar form - why? Because right now
@@ -169,7 +169,7 @@ If you want to add new app to the project, populate `apps` variable in config fi
 
 <br>
 
-![image](source/images/app_2.svg)
+![image](images/app_2.svg)
 
 <br>
 
@@ -249,7 +249,7 @@ class MyFlow(Flow)
 
 You can define mutiple "next" steps and this will allow you to build complex branched out pipelines, like on example bellow ->
 
-![image](source/images/flow1.svg)
+![image](images/flow1.svg)
 <br><br><br><br><br>
 
 ---
@@ -315,7 +315,7 @@ Just set `save_result` flag to True.
 
 <br><br><br>
 
-![image](source/images/flow2.svg)
+![image](images/flow2.svg)
 
 <br><br>
 
@@ -350,7 +350,7 @@ Flow - it's a class, this means we could use inheritance to redefine some steps 
 
 <br><br>
 
-![image](source/images/flow3.svg)
+![image](images/flow3.svg)
 
 <br><br><br><br><br><br>
 
@@ -390,7 +390,7 @@ It's possible to add new step to the top, insert in the middle or add "save_resu
 
 <br><br>
 
-![image](source/images/flow4.svg)
+![image](images/flow4.svg)
 
 <br><br>
 
@@ -414,7 +414,7 @@ Each pipeline component - could be a worker, which communicates with anothers co
 
 <br>
 
-![image](source/images/pipeline_1.svg)
+![image](images/pipeline_1.svg)
 
 <br><br>
 
@@ -481,7 +481,7 @@ And it's a bit similar to how we define Neural Networks using [Keras](https://ke
 
 <br>
 
-![image](source/images/pipeline_2.svg)
+![image](images/pipeline_2.svg)
 <br><br>
 
 ---
@@ -509,7 +509,7 @@ apply - completely redefine data based on pipeline component result.
 
 <br><br>
 
-![image](source/images/pipeline_3.svg)
+![image](images/pipeline_3.svg)
 
 <br>
 
