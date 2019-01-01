@@ -304,7 +304,7 @@
 <p>It&#39;s recommend to use latest python 3 version</p>
 </blockquote>
 
-<p>Just make <code>pip install stairs-project</code> to install all python dependenses.</p>
+<p>Just make <code>pip install stairsapp</code> to install all python dependenses.</p>
 
 <p>Stairs require redis, for storing statistic and some meta information, 
 even tho you will use different streaming/queue service. </p>
@@ -314,7 +314,7 @@ You must install <code>redis</code> for stairs.
 </aside>
 <h1 id='mission'>Mission</h1><h2 id='data-pipelines'>Data Pipelines</h2>
 <blockquote>
-<p><img src="images/source/images/data_pipeline.png" alt="image" /></p>
+<p><img src="images/data_pipeline.png" alt="image" /></p>
 </blockquote>
 
 <p>The main Stairs focus is data pipelines. It&#39;s a framework which helps you 
@@ -325,7 +325,7 @@ Different layears of abstractions allows you to build any kind of data flow grap
 and easily understand what&#39;s going on in your system. </p>
 <h2 id='parallel-async-distributed'>Parallel/Async/Distributed</h2>
 <blockquote>
-<p><img src="images/source/images/parallel.png" alt="parallel" /></p>
+<p><img src="images/parallel.png" alt="parallel" /></p>
 </blockquote>
 
 <p>Each component of stairs data pipeline could be a &quot;worker&quot; - separate process which allows you
@@ -336,7 +336,7 @@ to process data in a parallel way. </p>
 <p>Stairs framework focusing on speed and light, and speed of your &quot;workers&quot; mostly limited by your streaming/queues service.</p>
 <h2 id='for-data-science-and-data-engineering-with-love'>For data-science and data-engineering with love</h2>
 <blockquote>
-<p><img src="images/source/images/ds_en.svg" alt="ds_en" /></p>
+<p><img src="images/ds_en.svg" alt="ds_en" /></p>
 </blockquote>
 
 <p>Data-science and data-engineering growing  fast, and it&#39;s  hard to be expert on everything
@@ -356,7 +356,7 @@ you able to do that and test all hypotheses in your head directly influence your
 <h1 id='get-started'>Get started</h1><h2 id='project'>Project</h2><pre class="highlight shell tab-shell"><code>stairs-admin project:new name
 </code></pre>
 <blockquote>
-<p><img src="images/source/images/project.svg" alt="project" /></p>
+<p><img src="images/project.svg" alt="project" /></p>
 </blockquote>
 
 <p>When you done with installation let&#39;s try to kick start your first stairs project.</p>
@@ -376,7 +376,7 @@ It&#39;s similar to django maner, but you a free to change this structure in any
 <h2 id='app'>App</h2><pre class="highlight shell tab-shell"><code>stairs-admin app:new name
 </code></pre>
 <blockquote>
-<p><img src="images/source/images/app.svg" alt="app" /></p>
+<p><img src="images/app.svg" alt="app" /></p>
 </blockquote>
 
 <p>App - it&#39;s a way to generalize different approaches to one similar form - why? Because right now
@@ -406,7 +406,7 @@ a ton of maths and algorithms around. </p>
 
 <p><br></p>
 
-<p><img src="images/source/images/app_2.svg" alt="image" /></p>
+<p><img src="images/app_2.svg" alt="image" /></p>
 
 <p><br></p>
 <h1 id='app-components'>App components</h1><h2 id='flow'>Flow</h2><pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MyFlow</span><span class="p">(</span><span class="n">Flow</span><span class="p">)</span>
@@ -471,7 +471,7 @@ a ton of maths and algorithms around. </p>
 </code></pre>
 <p>You can define mutiple &quot;next&quot; steps and this will allow you to build complex branched out pipelines, like on example bellow -&gt;</p>
 
-<p><img src="images/source/images/flow1.svg" alt="image" />
+<p><img src="images/flow1.svg" alt="image" />
 <br><br><br><br><br></p>
 
 <hr>
@@ -528,7 +528,7 @@ Just set <code>save_result</code> flag to True.</p>
 
 <p><br><br><br></p>
 
-<p><img src="images/source/images/flow2.svg" alt="image" /></p>
+<p><img src="images/flow2.svg" alt="image" /></p>
 
 <p><br><br></p>
 
@@ -559,7 +559,7 @@ Just set <code>save_result</code> flag to True.</p>
 
 <p><br><br></p>
 
-<p><img src="images/source/images/flow3.svg" alt="image" /></p>
+<p><img src="images/flow3.svg" alt="image" /></p>
 
 <p><br><br><br><br><br><br></p>
 
@@ -596,7 +596,7 @@ Just set <code>save_result</code> flag to True.</p>
 
 <p><br><br></p>
 
-<p><img src="images/source/images/flow4.svg" alt="image" /></p>
+<p><img src="images/flow4.svg" alt="image" /></p>
 
 <p><br><br></p>
 <h2 id='pipeline'>Pipeline</h2><pre class="highlight python tab-python"><code>
@@ -613,7 +613,7 @@ Just set <code>save_result</code> flag to True.</p>
 
 <p><br></p>
 
-<p><img src="images/source/images/pipeline_1.svg" alt="image" /></p>
+<p><img src="images/pipeline_1.svg" alt="image" /></p>
 
 <p><br><br></p>
 
@@ -674,7 +674,7 @@ And it&#39;s a bit similar to how we define Neural Networks using <a href="https
 
 <p><br></p>
 
-<p><img src="images/source/images/pipeline_2.svg" alt="image" />
+<p><img src="images/pipeline_2.svg" alt="image" />
 <br><br></p>
 
 <hr>
@@ -697,7 +697,7 @@ apply - completely redefine data based on pipeline component result. </p>
 
 <p><br><br></p>
 
-<p><img src="images/source/images/pipeline_3.svg" alt="image" /></p>
+<p><img src="images/pipeline_3.svg" alt="image" /></p>
 
 <p><br></p>
 
