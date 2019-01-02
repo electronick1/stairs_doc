@@ -291,7 +291,7 @@
 
 <p>Stairs available on Python3, but you can handle data calculation on any languages. And even use any of Streaming/Queue services which you want. </p>
 
-<p>It&#39;s easy to start, test all your ideas/hypotheses in rocket way and it will be ready for production in any moment of time without special magic. </p>
+<p>It&#39;s easy to start, test all your ideas/hypotheses in rocket way and it will be ready for production at any moment of time without special magic. </p>
 
 <p>Get started with Installation and then get an overview with &quot;Get started&quot;. </p>
 <h1 id='installation'>Installation</h1><pre class="highlight python tab-python"><code><span class="c"># install redis https://redis.io/topics/quickstart</span>
@@ -301,10 +301,10 @@
 <span class="n">pip</span> <span class="n">install</span> <span class="n">stairs</span><span class="o">-</span><span class="n">project</span>
 </code></pre>
 <blockquote>
-<p>It&#39;s recommend to use latest python 3 version</p>
+<p>It&#39;s recommended to use latest python 3 version</p>
 </blockquote>
 
-<p>Just make <code>pip install stairsapp</code> to install all python dependenses.</p>
+<p>Just make <code>pip install stairs-project</code> to install all python dependencies.</p>
 
 <p>Stairs require redis, for storing statistic and some meta information, 
 even tho you will use different streaming/queue service. </p>
@@ -315,11 +315,11 @@ You must install <code>redis</code> for stairs.
 <h1 id='mission'>Mission</h1><h2 id='data-pipelines'>Data Pipelines</h2>
 <!-- > ![image](images/data_pipeline.png) -->
 
-<p>The main Stairs focus is data pipelines. It&#39;s a framework which helps you 
-build and manipulation of data through the data flow graph. </p>
+<p>The main Stairs focus is data pipelines. It&#39;s a framework which helps you to
+build and manipulate data through the data flow graph. </p>
 
-<p>In the same way you can associate it with MVP framework (like django) but for data pipelines.
-Different layears of abstractions allows you to build any kind of data flow graph,
+<p>In the same way, you can associate it with MVP framework (like Django) but for data pipelines.
+Different layers of abstractions allow you to build any kind of data flow graph,
 and easily understand what&#39;s going on in your system. </p>
 <h2 id='parallel-async-distributed'>Parallel/Async/Distributed</h2>
 <!-- > ![parallel](images/parallel.png) -->
@@ -333,38 +333,38 @@ to process data in a parallel way. </p>
 <h2 id='for-data-science-and-data-engineering-with-love'>For data-science and data-engineering with love</h2>
 <!-- > ![ds_en](images/ds_en.svg) -->
 
-<p>Data-science and data-engineering growing  fast, and it&#39;s  hard to be expert on everything
-in the same time. </p>
+<p>Data-science and data-engineering growing fast, and it&#39;s hard to be expert on everything
+at the same time. </p>
 
-<p>For example for train ML models you should spend about 80% of time to process data -- how fast 
-you able to do that and test all hypotheses in your head directly influence your final result.</p>
+<p>For example for train ML models, you should spend about 80% of the time to process data -- how fast 
+you will be able to do that and test all hypotheses in your head, directly influence your final result.</p>
 
-<p>Stairs allows data scientist  &quot;scalable&quot; solutions without high-level data engineering skills.</p>
+<p>Stairs allow data scientist to build &quot;scalable&quot; solutions without high-level data-engineering skills.</p>
 
 <ul>
-<li>Data scientist could focus only on data processing</li>
-<li>Data engeneer could focus only on storing and moving data (beetween pipeline components)</li>
+<li>Data-scientist could focus only on data processing</li>
+<li>Data-engineer could focus only on storing and moving data (between pipeline components)</li>
 </ul>
 
-<p>Data pipeline paradigm allows you to separate this two subjects, and speed up working with data.</p>
+<p>Data pipeline paradigm allows you to separate these two subjects, and speed up working with data.</p>
 <h1 id='get-started'>Get started</h1><h2 id='project'>Project</h2><pre class="highlight shell tab-shell"><code>stairs-admin project:new name
 </code></pre>
 <blockquote>
 <p><img src="images/project.svg" alt="project" /></p>
 </blockquote>
 
-<p>When you done with installation let&#39;s try to kick start your first stairs project.</p>
+<p>When you done with installation let&#39;s try to kick-start your first stairs project.</p>
 
-<p>For creating default project template just use following command:</p>
+<p>For creating default project template just use the following command:</p>
 
 <p><code>stairs-admin project:new name</code></p>
 
-<p>This command will generate basic project stucture with one app inside.<br>
-It&#39;s similar to django maner, but you a free to change this structure in any way you like. </p>
+<p>This command will generate a basic project structure with one app inside.<br>
+It&#39;s similar to Django manner, but you a free to change this structure in any way you like. </p>
 
-<p>Project has config file and &quot;manager.py&quot;.</p>
+<p>The project has a config file and &quot;manager.py&quot;.</p>
 
-<p>&quot;manager.py&quot; - in django maner allows you to read config, detect apps and execute shell commands.</p>
+<p>&quot;manager.py&quot; - in Django manner allows you to read config, detect apps and execute shell commands.</p>
 
 <p><br><br><br><br><br><br></p>
 <h2 id='app'>App</h2><pre class="highlight shell tab-shell"><code>stairs-admin app:new name
@@ -377,7 +377,7 @@ It&#39;s similar to django maner, but you a free to change this structure in any
 data-science approaches too scattered and it&#39;s hard to understand what&#39;s going on when you have
 a ton of maths and algorithms around. </p>
 
-<p>Each app has following components:</p>
+<p>Each app has the following components:</p>
 
 <ul>
 <li><p>pipeline - represents a data flow graph and determines how the data will be processed. Each pipeline consists of multiple smaller components like &quot;Flow&quot; (Data flow).  </p></li>
@@ -396,7 +396,7 @@ a ton of maths and algorithms around. </p>
 </code></pre>
 <p>To define your app you should initialize App object with name and config (More about app config in &quot;App components&quot; section).</p>
 
-<p>If you want to add new app to the project, populate <code>apps</code> variable in config file or use <code>StairsProject.add_app(app)</code></p>
+<p>If you want to add a new app to the project, populate <code>apps</code> variable in the config file or use <code>StairsProject.add_app(app)</code></p>
 
 <p><br></p>
 
@@ -412,13 +412,13 @@ a ton of maths and algorithms around. </p>
     <span class="k">def</span> <span class="nf">second_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_step_result</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">second_step_result</span><span class="o">=</span><span class="n">first_step_result</span><span class="p">)</span>
 </code></pre>
-<p>Flow - It&#39;s a low level component which actually define&#39;s data pipeline. </p>
+<p>Flow - It&#39;s a low-level component which actually defines data pipeline. </p>
 
-<p>Flow represent&#39;s data flow graph as a chain of functions called &quot;steps&quot;. You can connect those steps simply define &quot;next step&quot; in decorator:</p>
+<p>Flow represents data flow graph as a chain of functions called &quot;steps&quot;. You can connect those steps simply define &quot;next step&quot; in decorator:</p>
 
 <p><code>@step(next_step, next_step ... )</code></p>
 
-<p>The last step in your graph should be define with next step set to None.</p>
+<p>The last step in your graph should be defined with next step set to None.</p>
 
 <p><code>@step(None)</code></p>
 
@@ -440,7 +440,7 @@ a ton of maths and algorithms around. </p>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">first_step_result</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>    
 
 </code></pre>
-<p>The input for next step is an output from current. </p>
+<p>The input for the next step is output from the current. </p>
 
 <p>Result of each step is accumulating, this means that from any low-level steps you will be able to get values from high-level steps:</p>
 
@@ -463,7 +463,7 @@ a ton of maths and algorithms around. </p>
         <span class="c"># data from root1 and root2 will be merge into current step</span>
         <span class="k">pass</span>
 </code></pre>
-<p>You can define mutiple &quot;next&quot; steps and this will allow you to build complex branched out pipelines, like on example bellow -&gt;</p>
+<p>You can define multiple &quot;next&quot; steps and this will allow you to build complex branched out pipelines, like on example bellow -&gt;</p>
 
 <p><img src="images/flow1.svg" alt="image" />
 <br><br><br><br><br></p>
@@ -497,7 +497,7 @@ a ton of maths and algorithms around. </p>
 
 <p><code>self.start_from(self.mystep, **kwargs_for_highest_step)</code></p>
 
-<p>As a result you will get data from last step in your pipeline (with next_step set to None).</p>
+<p>As a result, you will get data from the last step in your pipeline (with the next_step set to None).</p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
 
@@ -586,7 +586,7 @@ Just set <code>save_result</code> flag to True.</p>
 </code></pre>
 <p>Inheritance also allows you to reconnect some steps and change Flow structure.</p>
 
-<p>It&#39;s possible to add new step to the top, insert in the middle or add &quot;save_result&quot; flag.</p>
+<p>It&#39;s possible to add a new step to the top, insert in the middle or add &quot;save_result&quot; flag.</p>
 
 <p><br><br></p>
 
@@ -603,7 +603,7 @@ Just set <code>save_result</code> flag to True.</p>
 </code></pre>
 <p>Pipeline - it&#39;s a way to connect multiple flows (or others pipelines) into one big graph/pipeline. </p>
 
-<p>Each pipeline component - could be a worker, which communicates with anothers components throught streaming/queue service.</p>
+<p>Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.</p>
 
 <p><br></p>
 
@@ -648,22 +648,22 @@ Just set <code>save_result</code> flag to True.</p>
     <span class="k">return</span> <span class="n">result</span>
 
 </code></pre><h3 id='manipulating-data-inside-pipeline'>Manipulating data inside pipeline</h3>
-<p>Input of stairs pipeline is a <a href="https://en.wikipedia.org/wiki/Mock_object">&quot;mock&quot;</a> values called &quot;DataPoint&quot; - it&#39;s representation of the data which will be executed inside pipeline components. </p>
+<p>An input of stairs pipeline is a <a href="https://en.wikipedia.org/wiki/Mock_object">&quot;mock&quot;</a> values called &quot;DataPoint&quot; - it&#39;s the representation of the data which will be executed inside pipeline components. </p>
 
-<p>You can subscribe DataPoint by some Flow component and result of this subscribtion will be new object called &quot;DataFrame&quot; 
-- it&#39;s represent result of your flow.</p>
+<p>You can subscribe DataPoint by some Flow component and result of this subscription will be a new object called &quot;DataFrame&quot; 
+- it represents a result of your flow.</p>
 
-<p>You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (result of your flow) you can use
-<code>get(&#39;value&#39;)</code> method. Result of &quot;get&quot; method will be DataPoint.</p>
+<p>You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (the result of your flow) you can use
+<code>get(&#39;value&#39;)</code> method. The result of the &quot;get&quot; method will be DataPoint.</p>
 
 <p>If you want to modify your DataFrame you can use <code>make(value=new_value)</code> method and result will be new DataFrame.</p>
 
 <p>Now one of the most interesting part: If you want to combine multiple DataPoints and DataFrame into one DataFrame you can use 
-<code>concatinate(value1=data_point, value2=data_point2)</code> function - which return DataFrame with defined arguments. </p>
+<code>concatenate(value1=data_point, value2=data_point2)</code> function - which return DataFrame with defined arguments. </p>
 
-<p>Here an example of pipeline -&gt; </p>
+<p>Here an example of the pipeline -&gt; </p>
 
-<p>As you can see It&#39;s quite simple to difine such complex and hard architecture just with 6 lines of code.
+<p>As you can see It&#39;s quite simple to define such complex and hard architecture just with 6 lines of code.
 And it&#39;s a bit similar to how we define Neural Networks using <a href="https://keras.io/">Keras</a></p>
 
 <p><br></p>
@@ -680,7 +680,7 @@ And it&#39;s a bit similar to how we define Neural Networks using <a href="https
                 <span class="o">.</span><span class="n">subscribe_consumer</span><span class="p">(</span><span class="n">save_result</span><span class="p">)</span>
 
 </code></pre><h3 id='how-flow-change-data'>How flow change data</h3>
-<p>Unlike Flow, Pipeline components could accomulate data or completely change/redefine it. </p>
+<p>Unlike Flow, Pipeline components could accumulate data or completely change/redefine it. </p>
 
 <p>For this stairs has two defenitions: <br>
 - subscribe_smths <br>
@@ -707,13 +707,13 @@ apply - completely redefine data based on pipeline component result. </p>
                 <span class="o">.</span><span class="n">subscribe_consumer</span><span class="p">(</span><span class="n">save_result</span><span class="p">)</span>
 
 </code></pre><h3 id='call-another-pipeline'>Call another pipeline</h3>
-<p>Inside your pipeline you can use any other pipelines. </p>
+<p>Inside your pipeline, you can use any other pipelines. </p>
 
-<p>Note: that all pipelines - is a workers, and you can&#39;t set worker=False to pipeline. </p>
+<p>Note: that all pipelines - is a worker, and you can&#39;t set worker=False to a pipeline. </p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
 <h2 id='producer'>Producer</h2>
-<p>Producer - it&#39;s a set of components for reading any typos of data and then call pipeline to handle your data.</p>
+<p>Producer - it&#39;s a set of components for reading any types of data and then call pipeline to handle your data.</p>
 
 <p>This component will populate your pipeline by &quot;real&quot; data which you can read from any source you want. </p>
 
@@ -721,10 +721,10 @@ apply - completely redefine data based on pipeline component result. </p>
 
 <ul>
 <li>simple iterator <br></li>
-<li>worker iterator - the way to sefly read your data <br></li>
+<li>worker iterator - the way to safely read your data <br></li>
 </ul>
 
-<p>When you definied producer you can call it from shell using manager.py:
+<p>When you define producer you can call it from shell using manager.py:
 <code>python manager.py producer:process</code></p>
 
 <p><br><br></p>
@@ -738,12 +738,12 @@ apply - completely redefine data based on pipeline component result. </p>
             <span class="k">yield</span> <span class="n">row</span>
 
 </code></pre><h3 id='simple-producer'>Simple Producer</h3>
-<p>It&#39;s a iterator function which yields data to pipeline. You can run this &quot;producer&quot; from console:<br>
+<p>It&#39;s an iterator function which yields data to pipeline. You can run this &quot;producer&quot; from console:<br>
 <code>python manager.py producer:process</code></p>
 
-<p>It&#39;s simply goes by all items which yields producer, and send them to streaming/queue service which then goes to pipeline. </p>
+<p>It&#39;s simply going by all items which producers yields and send them to streaming/queue service which then goes to pipeline. </p>
 
-<p>To prevent overfitting of your streaming service you can set &quot;limit&quot; and at the moment when producer reach this limit it will sleep for a while. </p>
+<p>To prevent overfitting of your streaming service you can set &quot;limit&quot; and at the moment when producer reaches this limit it will sleep for a while. </p>
 
 <p><br><br><br></p>
 
@@ -761,14 +761,14 @@ apply - completely redefine data based on pipeline component result. </p>
         <span class="k">yield</span> <span class="n">row</span>
 
 </code></pre><h3 id='worker-producer'>Worker Producer</h3>
-<p>It&#39;s a parallel/distributed way to populate your pipeline with data. It&#39;s almost 99% safe - it has smart features to prevent data lose or duplication.</p>
+<p>It&#39;s a parallel/distributed way to populate your pipeline with data. It&#39;s almost 99% safe - it has smart features to prevent data loss or duplication.</p>
 
 <p>The way how it works a bit complex then simple producer, but if you know something about &quot;batch&quot; processing - everything will be simple for you.</p>
 
-<p>The idea to split your data by batches and read each batch independally. If whole batch was read successfuly it goes to pipeline. Internally Worker producer
-using bitmaps to track all your batches status, and only way when you can lose your data is a fail with redis.</p>
+<p>The idea to split your data by batches and read each batch independently. If the whole batch was read successfully it goes to pipeline. Internally Worker producer
+using bitmaps to track all your batches status, and the only way when you can lose your data is a fail with redis.</p>
 
-<p>Worker producer has two states: first initializing - it&#39;s just checking amount of batches and creates all needed meta information. 
+<p>Worker producer has two states: first initializing - it&#39;s just checking the number of batches and creates all needed meta information. 
 To initilaze worker_producer run: <br>
 <code>python manager.py producer:init</code></p>
 
@@ -779,17 +779,17 @@ To initilaze worker_producer run: <br>
 <p>Then to start reading process you can run: <br>
 <code>python manager.py producer:process</code></p>
 
-<p>As it was mentioned before worker_producer - it&#39;s a parrallel way to read your data. So if you want more processes just run command above multiple times. 
+<p>As it was mentioned before worker_producer - it&#39;s a parallel way to read your data. So if you want more processes just run the command above multiple times. 
 It will read batches from <code>producer:init</code> command.</p>
 
-<p>In the same way like simple_producer it will prevent queue from overfitting. </p>
+<p>In the same way like simple_producer it will prevent the queue from overfitting. </p>
 
 <p><br><br><br></p>
 <h2 id='consumer'>Consumer</h2><pre class="highlight python tab-python"><code><span class="nd">@app.consumer</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">save_to_redis</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">):</span>
     <span class="n">redis</span><span class="o">.</span><span class="nb">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 </code></pre>
-<p>Consumer - it&#39;s a set of components for writing/saving your data to any type of store or change global state of your system.</p>
+<p>Consumer - it&#39;s a set of components for writing/saving your data to any type of store or change the global state of your system.</p>
 
 <p>You are free to write/save your data inside Flow component, but consumer it&#39;s not only about saving - it&#39;s a way to accumulate all
 data to one place, and stairs has 3 types of consumers:</p>
@@ -797,7 +797,7 @@ data to one place, and stairs has 3 types of consumers:</p>
 <ul>
 <li>&quot;simple consumer&quot; - just a simple function which should not return any data. Useful for saving data to data store.</li>
 <li>&quot;standalone_consumer&quot; - function which could be called as a separate process. Useful for writing data to a file or accumulating it inside one process for something. </li>
-<li>&quot;consumer_iter&quot; - function which yields data from pipeline. Useful when you want to train neural network and needs data generator. </li>
+<li>&quot;consumer_iter&quot; - function which yields data from the pipeline. Useful when you want to train the neural network and needs data generator. </li>
 </ul>
 
 <p>Here on the right example of &quot;simple consumer&quot; -&gt; 
@@ -814,9 +814,9 @@ data to one place, and stairs has 3 types of consumers:</p>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
 
 </code></pre>
-<p>Standalone consumer it&#39;s type of consumer which will NOT execute automatically.</p>
+<p>Standalone consumer it&#39;s a type of consumer which will NOT execute automatically.</p>
 
-<p>To execute it and process data inside, you need to run special command:</p>
+<p>To execute it and process data inside, you need to run a special command:</p>
 
 <p><code>python manager.py consumer:standalone app.write_to_file</code></p>
 
@@ -855,7 +855,7 @@ data to one place, and stairs has 3 types of consumers:</p>
 </code></pre>
 <p>Consumer as a separe process.</p>
 
-<p>If you want to train neural network, and use output of your pipeline as a train set, you can use:<br>
+<p>If you want to train a neural network, and use an output of your pipeline as a train set, you can use:<br>
 <code>@consumer_iter()</code> component which allows you to read data from streaming/queue service directly to your function.</p>
 <h2 id='app-config'>APP Config</h2><pre class="highlight python tab-python"><code>
 <span class="c"># app_config.py</span>
@@ -885,11 +885,11 @@ data to one place, and stairs has 3 types of consumers:</p>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">use_validation</span> <span class="o">=</span> <span class="bp">True</span>
 
 </code></pre>
-<p>It&#39;s a place when you can setup your app. </p>
+<p>It&#39;s a place when you can set up your app. </p>
 
-<p>App config allows to defene app settings which useful when you want to share your app with the world.</p>
+<p>App config allows defining app settings which useful when you want to share your app with the world.</p>
 
-<p>Here it&#39;s also possible to define pipeiline config like on example -&gt; </p>
+<p>Here it&#39;s also possible to define pipeline config like on example -&gt; </p>
 
 <p><br></p>
 <h1 id='examples'>Examples</h1>
