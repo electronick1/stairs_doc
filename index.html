@@ -209,7 +209,6 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="python">python</a>
         </div>
@@ -318,14 +317,19 @@ You must install <code>redis</code> for stairs.
 <p>The main Stairs focus is data pipelines. It&#39;s a framework which helps you to
 build and manipulate data through the data flow graph. </p>
 
-<p>In the same way, you can associate it with MVP framework (like Django) but for data pipelines.
-Different layers of abstractions allow you to build any kind of data flow graph,
+<p>In the same way, you can associate stairs with MVP framework (like Django) but for data pipelines.
+Different layers of abstractions and components allow you to build any kind of data flow graph,
 and easily understand what&#39;s going on in your system. </p>
 <h2 id='parallel-async-distributed'>Parallel/Async/Distributed</h2>
 <!-- > ![parallel](images/parallel.png) -->
 
-<p>Each component of stairs data pipeline could be a &quot;worker&quot; - separate process which allows you
-to process data in a parallel way. </p>
+<p>Each component of data pipeline could be represented as a separate python process (worker). Each component comunicates
+with each other using streaming/queues services and together could process your data in a parallel way.</p>
+
+<p>Right now stairs using: <br>
+- celery <br>
+- self implemented redis queue <br>
+- kafka (under development) <br></p>
 
 <p>There is interesting wiki article about workers/jobs -&gt; <a href="https://en.wikipedia.org/wiki/Job_(computing)">Wiki</a></p>
 
@@ -336,17 +340,15 @@ to process data in a parallel way. </p>
 <p>Data-science and data-engineering growing fast, and it&#39;s hard to be expert on everything
 at the same time. </p>
 
-<p>For example for train ML models, you should spend about 80% of the time to process data -- how fast 
-you will be able to do that and test all hypotheses in your head, directly influence your final result.</p>
+<p>For example to train ML models, you should spend about 80% of the time to process data -- how fast 
+you will be able to process your data and test all hypotheses, directly influence your final result.</p>
 
-<p>Stairs allow data scientist to build &quot;scalable&quot; solutions without high-level data-engineering skills.</p>
+<p>Stairs allows data scientist to build &quot;scalable&quot; solutions without high-level data-engineering skills.</p>
 
 <ul>
 <li>Data-scientist could focus only on data processing</li>
 <li>Data-engineer could focus only on storing and moving data (between pipeline components)</li>
 </ul>
-
-<p>Data pipeline paradigm allows you to separate these two subjects, and speed up working with data.</p>
 <h1 id='get-started'>Get started</h1><h2 id='project'>Project</h2><pre class="highlight shell tab-shell"><code>stairs-admin project:new name
 </code></pre>
 <blockquote>
@@ -354,6 +356,10 @@ you will be able to do that and test all hypotheses in your head, directly influ
 </blockquote>
 
 <p>When you done with installation let&#39;s try to kick-start your first stairs project.</p>
+
+<p>Stairs project kind similar to django approach (when you can create default project template). 
+To have better overview of your components you can create similar project in stairs. It will contain apps with all basic layears inside. <bt>
+But you completely free to use another structure which you want. Default project template is just a way to quikly kick start your idea. </p>
 
 <p>For creating default project template just use the following command:</p>
 
@@ -488,7 +494,9 @@ a ton of maths and algorithms around. </p>
         <span class="k">return</span> <span class="n">value</span> <span class="o">**</span> <span class="mi">2</span>
 
 </code></pre>
-<p>You can call any step from your flow. Then whole chain (pipeline) of steps will be executed. </p>
+<p>Now, to execute your flow class you should have <code>__call__</code> methoud defenied. </p>
+
+<p>Inside <code>__call__</code> you can execute any step from your flow. Then whole chain (pipeline) of steps will be executed. </p>
 
 <p><code>self.mystep(**kwargs_for_highest_step)</code></p>
 
@@ -517,7 +525,7 @@ a ton of maths and algorithms around. </p>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">power2</span><span class="o">=</span><span class="n">value</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 </code></pre>
 <p>It&#39;s also possible to customize steps which should return back result data. 
-Just set <code>save_result</code> flag to True.</p>
+Just set <code>save_result</code> flag to True. </p>
 
 <p><br><br><br></p>
 
@@ -549,6 +557,8 @@ Just set <code>save_result</code> flag to True.</p>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">power4</span><span class="o">=</span><span class="n">value</span> <span class="o">**</span> <span class="mi">4</span><span class="p">)</span>
 </code></pre>
 <p>Flow - it&#39;s a class, this means we could use inheritance to redefine some steps logic.</p>
+
+<p>It&#39;s a very powerfull way to extend/change your data pipeline. </p>
 
 <p><br><br></p>
 
