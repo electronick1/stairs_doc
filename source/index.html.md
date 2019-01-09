@@ -14,15 +14,13 @@ search: true
 
 # Welcome
 
-Stairs - It's a simple tool which allows you to juggle with data. 
+Stairs is a simple tool that allows you to juggle data.
 
-You can build data pipelines and make parallel/async/distributed calculations for most of your data related tasks.
+You can build data pipelines and perform parallel/async/distributed calculations for most of your data related tasks.
 
-Stairs available on Python3, but you can handle data calculation on any languages. And even use any of Streaming/Queue services which you want. 
+Stairs is available in Python3, but you can process data in any language and even use any streaming/queue services you want.
 
-It's easy to start, test all your ideas/hypotheses in rocket way and it will be ready for production at any moment of time without special magic. 
-
-Get started with Installation and then get an overview with "Get started". 
+It's easy to get started and test all your hypotheses in no time. It will be ready for production at any moment.
 
 # Installation
 
@@ -37,15 +35,15 @@ pip install stairs-project
 
 
 
-> It's recommended to use latest python 3 version
+> It's recommended to use the latest python 3 version
 
-Just make `pip install stairs-project` to install all python dependencies.
+Just do `pip install stairs-project` to install all python dependencies.
 
-Stairs require redis, for storing statistic and some meta information, 
-even tho you will use different streaming/queue service. 
+Stairs requires redis to store statistics and some meta information
+even though you may use a different streaming/queue service.
 
 <aside class="notice">
-You must install <code>redis</code> for stairs.
+You have to install <code>redis</code> for stairs.
 </aside>
 
 # Mission
@@ -54,12 +52,12 @@ You must install <code>redis</code> for stairs.
 
 <!-- > ![image](images/data_pipeline.png) -->
 
-The main Stairs focus is data pipelines. It's a framework which helps you to
-build and manipulate data through the data flow graph. 
+The main focus of Stairs is data pipelines. It's a framework that helps you
+build and manipulate data using a data flow graph.
 
-In the same way, you can associate it with MVP framework (like Django) but for data pipelines.
-Different layers of abstractions allow you to build any kind of data flow graph,
-and easily understand what's going on in your system. 
+You can think of it as an MVP framework, e.g. Django, but for data pipelines.
+A higher level of abstraction lets you build any kind of data flow graph
+and easily understand what's going on in your system.
 
 
 
@@ -67,30 +65,31 @@ and easily understand what's going on in your system.
 
 <!-- > ![parallel](images/parallel.png) -->
 
-Each component of stairs data pipeline could be a "worker" - separate process which allows you
-to process data in a parallel way. 
+Each component of a data pipeline in Stairs can be a "worker" -- a separate process -- which allows you
+to process data in a parallel way.
 
-There is interesting wiki article about workers/jobs -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
+There is an interesting wiki article about workers/jobs -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
 
-Stairs framework focusing on speed and light, and speed of your "workers" mostly limited by your streaming/queues service.
+Stairs aims to be fast and lightweight, so the speed of your "workers"
+is mostly limited by your streaming/queue service.
 
 
 ## For data-science and data-engineering with love
 
 <!-- > ![ds_en](images/ds_en.svg) -->
 
-Data-science and data-engineering growing fast, and it's hard to be expert on everything
-at the same time. 
+Data-science and data-engineering are growing fast and it's hard to be an expert in everything
+at the same time.
 
-For example for train ML models, you should spend about 80% of the time to process data -- how fast 
-you will be able to do that and test all hypotheses in your head, directly influence your final result.
+In order to train ML models you often have to spend about 80% of time on data processing. How fast
+you can do that and test all hypotheses in your head directly influences your final result.
 
-Stairs allow data scientist to build "scalable" solutions without high-level data-engineering skills.
+Stairs enables data scientists to build scalable solutions without high-level data-engineering skills.
 
-- Data-scientist could focus only on data processing
-- Data-engineer could focus only on storing and moving data (between pipeline components)
+- Data-scientists can focus on data processing
+- Data-engineers can focus on storing and moving data
 
-Data pipeline paradigm allows you to separate these two subjects, and speed up working with data.
+The data pipeline paradigm lets you separate these two subjects and speed up working with data.
 
 
 #Get started
