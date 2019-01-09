@@ -57,8 +57,9 @@ You must install <code>redis</code> for stairs.
 The main Stairs focus is data pipelines. It's a framework which helps you to
 build and manipulate data through the data flow graph. 
 
-In the same way, you can associate it with MVP framework (like Django) but for data pipelines.
-Different layers of abstractions allow you to build any kind of data flow graph,
+
+In the same way, you can associate stairs with MVP framework (like Django) but for data pipelines.
+Different layers of abstractions and components allow you to build any kind of data flow graph,
 and easily understand what's going on in your system. 
 
 
@@ -67,8 +68,13 @@ and easily understand what's going on in your system.
 
 <!-- > ![parallel](images/parallel.png) -->
 
-Each component of stairs data pipeline could be a "worker" - separate process which allows you
-to process data in a parallel way. 
+Each component of data pipeline could be represented as a separate python process (worker). Each component comunicates
+with each other using streaming/queues services and together could process your data in a parallel way.
+
+Right now stairs using: <br>
+- celery <br>
+- self implemented redis queue <br>
+- kafka (under development) <br>
 
 There is interesting wiki article about workers/jobs -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
 
@@ -82,15 +88,13 @@ Stairs framework focusing on speed and light, and speed of your "workers" mostly
 Data-science and data-engineering growing fast, and it's hard to be expert on everything
 at the same time. 
 
-For example for train ML models, you should spend about 80% of the time to process data -- how fast 
-you will be able to do that and test all hypotheses in your head, directly influence your final result.
+For example to train ML models, you should spend about 80% of the time to process data -- how fast 
+you will be able to process your data and test all hypotheses, directly influence your final result.
 
-Stairs allow data scientist to build "scalable" solutions without high-level data-engineering skills.
+Stairs allows data scientist to build "scalable" solutions without high-level data-engineering skills.
 
 - Data-scientist could focus only on data processing
 - Data-engineer could focus only on storing and moving data (between pipeline components)
-
-Data pipeline paradigm allows you to separate these two subjects, and speed up working with data.
 
 
 #Get started
@@ -105,8 +109,12 @@ stairs-admin project:new name
 > ![project](images/project.svg)
 
 
-
 When you done with installation let's try to kick-start your first stairs project.
+
+Stairs project kind similar to django approach (when you can create default project template). 
+To have better overview of your components you can create similar project in stairs. It will contain apps with all basic layears inside. <bt>
+But you completely free to use another structure which you want. Default project template is just a way to quikly kick start your idea. 
+
 
 For creating default project template just use the following command:
 
@@ -114,7 +122,6 @@ For creating default project template just use the following command:
 
 
 This command will generate a basic project structure with one app inside.<br>
-It's similar to Django manner, but you a free to change this structure in any way you like. 
 
 The project has a config file and "manager.py".
 
@@ -276,8 +283,9 @@ class MyFlow(Flow):
             
 ```
 
+Now, to execute your flow class you should have `__call__` methoud defenied. 
 
-You can call any step from your flow. Then whole chain (pipeline) of steps will be executed. 
+Inside `__call__` you can execute any step from your flow. Then whole chain (pipeline) of steps will be executed. 
 
 `self.mystep(**kwargs_for_highest_step)`
 
@@ -311,7 +319,7 @@ class MyFlow(Flow):
 ```
 
 It's also possible to customize steps which should return back result data. 
-Just set `save_result` flag to True.
+Just set `save_result` flag to True. 
 
 <br><br><br>
 
@@ -347,6 +355,8 @@ class MyFlow2(MyFlow):
 
 
 Flow - it's a class, this means we could use inheritance to redefine some steps logic.
+
+It's a very powerfull way to extend/change your data pipeline. 
 
 <br><br>
 
