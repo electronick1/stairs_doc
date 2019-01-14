@@ -422,6 +422,14 @@ Pipeline - it's a way to connect multiple flows (or others pipelines) into one b
 
 Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.
 
+To run pipeline (and let data go through pipeline components) run: <br>
+`python manager.py pipelines:run`
+
+It will run all workers and start process your queue (using streaming/queue service).
+
+If you want to run some particular pipeline use following command: <br>
+`python manager.py pipelines:run app_name.pipeline_name` <br>
+
 <br>
 
 ![image](images/pipeline_1.svg)
