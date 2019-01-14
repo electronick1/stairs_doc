@@ -614,6 +614,14 @@ Just set <code>save_result</code> flag to True. </p>
 
 <p>Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.</p>
 
+<p>To run pipeline (and let data go through pipeline components) run: <br>
+<code>python manager.py pipelines:run</code></p>
+
+<p>It will run all workers and start process your queue (using streaming/queue service).</p>
+
+<p>If you want to run some particular pipeline use following command: <br>
+<code>python manager.py pipelines:run app_name.pipeline_name</code> <br></p>
+
 <p><br></p>
 
 <p><img src="images/pipeline_1.svg" alt="image" /></p>
