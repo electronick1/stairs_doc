@@ -729,6 +729,46 @@ apply - completely redefine data based on pipeline component result. </p>
 <p>Note: that all pipelines - is a worker, and you can&#39;t set worker=False to a pipeline. </p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<hr>
+<pre class="highlight python tab-python"><code>
+<span class="k">def</span> <span class="nf">custom_function</span><span class="p">(</span><span class="n">new_value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">new_value</span><span class="o">=</span><span class="n">new_value</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@app.pipeline</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">base_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">value</span>\
+        <span class="o">.</span><span class="n">subscribe_func</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">new_value</span><span class="o">=</span><span class="n">value</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s">'plus_one'</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">subscribe_func</span><span class="p">(</span><span class="n">custom_function</span><span class="p">,</span> <span class="n">as_worker</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+</code></pre><h3 id='subscribe-any-function-you-want'>Subscribe any function you want</h3>
+<p>It&#39;s possible to add any function you want inside your data pipeline. </p>
+
+<p>If you are using lambda function it&#39;s quite important to set name, because otherwise
+if this function will be a worker it will be imposible to recognize it. </p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<hr>
+<pre class="highlight python tab-python"><code>
+<span class="k">def</span> <span class="nf">custom_function</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">new_value</span><span class="o">=</span><span class="n">new_value</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@app.pipeline</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">base_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">value</span>\
+        <span class="o">.</span><span class="n">subscribe_func</span><span class="p">(</span><span class="n">custom_function</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="s">'/tmp/save_data.txt'</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">subscribe_consumer</span><span class="p">(</span><span class="n">save_to_file</span><span class="p">,</span> <span class="n">as_worker</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+</code></pre><h3 id='custom-values'>Custom values</h3>
+<p>It&#39;s possible to add some additional values (with real data) into your pipeline. </p>
+
+<p>It useful when you want to configure something. </p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
 <h2 id='producer'>Producer</h2>
 <p>Producer - it&#39;s a set of components for reading any types of data and then call pipeline to handle your data.</p>
 
