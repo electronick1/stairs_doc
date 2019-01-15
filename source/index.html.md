@@ -557,6 +557,57 @@ Note: that all pipelines - is a worker, and you can't set worker=False to a pipe
 <br><br><br><br><br><br><br><br><br><br><br>
 
 
+---
+
+```python
+
+def custom_function(new_value):
+    return dict(new_value=new_value*2)
+
+
+@app.pipeline()
+def base_pipeline(pipeline, value):
+    return value\
+        .subscribe_func(lambda value: dict(new_value=value+1), name='plus_one')\
+        .subscribe_func(custom_function, as_worker=True)
+
+```
+
+### Subscribe any function you want
+
+It's possible to add any function you want inside your data pipeline. 
+
+If you are using lambda function it's quite important to set name, because otherwise
+if this function will be a worker it will be imposible to recognize it. 
+
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+---
+
+```python
+
+def custom_function(value):
+    return dict(new_value=new_value*2)
+
+
+@app.pipeline()
+def base_pipeline(pipeline, value):
+    return value\
+        .subscribe_func(custom_function)\
+        .add_value(file_path='/tmp/save_data.txt')\
+        .subscribe_consumer(save_to_file, as_worker=True)
+
+```
+
+### Custom values
+
+It's possible to add some additional values (with real data) into your pipeline. 
+
+It useful when you want to configure something. 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
 
 ## Producer
 
