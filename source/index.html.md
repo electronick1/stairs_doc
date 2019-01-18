@@ -127,6 +127,7 @@ The project has a config file and "manager.py".
 
 "manager.py" - in Django manner allows you to read config, detect apps and execute shell commands.
 
+
 <br><br><br><br><br><br>
 
 
@@ -150,11 +151,13 @@ Each app has the following components:
 
 - pipeline - represents a data flow graph and determines how the data will be processed. Each pipeline consists of multiple smaller components like "Flow" (Data flow).  
 
-- flow (Data Flow) - set of functions (called [steps](https://en.wikipedia.org/wiki/Job_(computing))) which could change/filter/populate your data.
-
 - producer - function which helps you to read the source (file, database ...) and then follow it to data pipeline.
 
 - consumer - function which writes data to data store or change "global state".
+
+- flow (Data Flow) - set of functions (called [steps](https://en.wikipedia.org/wiki/Job_(computing))) which could change/filter/populate your data.
+
+
 
 
 To create new "default" app use following command:
@@ -182,6 +185,230 @@ If you want to add a new app to the project, populate `apps` variable in the con
 
 #App components
 
+
+## Pipeline
+
+```python
+
+@app.pipeline()
+def my_pipeline(pipeline, value):
+    return value.subscribe_func(my_function_which_process_data, as_worker=True) \
+                .subscribe_flow(MySecondFlow())\
+                .subscribe_consumer(save_result)
+
+```
+
+
+
+Pipeline - it's a way to connect multiple objects (functions/classes/other pipelines) into one big graph. 
+
+The way how it's works a bit tricky but quite simple to understand. Input of each pipeline could be any data you want, then
+you can subscribe some objects to this data, and connect more and more objects to one big graph which super easy to understand
+and manipulate.
+
+Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.
+
+To run pipeline (and let data go through pipeline components) use: <br>
+`python manager.py pipelines:run`
+
+It will run all workers and start process your queue (using streaming/queue service).
+
+If you want to run some particular pipeline use following command: <br>
+`python manager.py pipelines:run app_name.pipeline_name` <br>
+
+Let's dive a bit deeply to pipelines structure:
+
+
+<br>
+
+![image](images/pipeline_1.svg)
+
+<br><br>
+
+---
+
+```python
+
+@app.pipeline()
+def full_pipeline(pipeline, value1, value2, value3):
+
+    # DataFrame
+    all_at_once = concatinate(data_point1=value1,
+                              data_point2=value2,
+                              data_point3=value3)
+
+    # DataFrame
+    my_flow_result = all_at_once.subscribe_func(my_function, as_worker=True)
+
+    # DataPoint
+    flow_data_point = my_flow_result.get("result_data_point")
+
+    # DataFrame
+    result = flow_data_point.subscribe_flow(MyFlow2())\
+                            .make(result=flow2_result)
+
+    return result
+
+@app.pipeline
+def short_pipeline(pipeline, value1, value2, value3):
+
+    # DataFrame
+    result = concatinate(data_point1=value1, 
+                         data_point2=value2, 
+                         data_point3=value3)\
+             .subscribe_func(my_function, as_worker=True)\
+             .get("result1")\
+             .subscribe_flow(MyFlow2())\
+             .make(result='result1')\
+
+    return result
+
+```
+
+### Manipulating data inside pipeline
+
+An input of stairs pipeline is a ["mock"](https://en.wikipedia.org/wiki/Mock_object) values called "DataPoint" - it's a representation of the ANY data which will be executed inside pipeline components. 
+
+The mock data will be converted to "real" data as soon as you call pipeline: <br>
+
+`short_pipeline(value1=1, value2=2, value3=3)` <br>
+
+But this "real" data will be accesseble only inside functions and flows which you used in subscribe methods.
+(you can't use "real" values directly inside pipeline function - this function it's just for building pipelines, not for data manipulation)
+
+You can subscribe DataPoint by some function or Flow component and result of this subscription will be a new object called "DataFrame" 
+(kind of dict object with key:DataPoint structure) - it represents a result of your flow.
+
+You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (the result of your flow) you can use
+`get('value')` method. The result of the "get" method will be DataPoint.
+
+If you want to modify your DataFrame you can use `make(value=new_value)` method and result will be new DataFrame.
+
+Now one of the most interesting part: If you want to combine multiple DataPoints and DataFrame into one DataFrame you can use 
+`concatenate(value1=data_point, value2=data_point2)` function - which return DataFrame with defined arguments. 
+
+
+Here an example of the pipeline -> 
+
+As you can see It's quite simple to define such complex and hard architecture just with 6 lines of code.
+And it's a bit similar to how we define Neural Networks using [Keras](https://keras.io/)
+
+<br>
+
+![image](images/pipeline_2.svg)
+<br><br>
+
+---
+
+```python
+
+@app.pipeline()
+def my_pipeline(pipeline, value):
+    return value.subscribe_flow(MyFlow(), as_worker=True) \
+                .apply_flow(MySecondFlow())\
+                .subscribe_consumer(save_result)
+
+```
+
+### How flow change data
+
+Pipeline components could accumulate data or completely change/redefine it. 
+
+For this stairs has two defenitions: <br>
+- subscribe_smths <br>
+- apply_smths <br>
+
+subscribe - accomulate/update data <br>
+apply - completely redefine data based on pipeline component result. 
+
+<br><br>
+
+![image](images/pipeline_3.svg)
+
+<br>
+
+
+
+---
+
+```python
+
+@app.pipeline()
+def base_pipeline(pipeline, value):
+    return value.subscribe_flow(BaseFlow())
+
+@app.pipeline()
+def my_pipeline(pipeline, value):
+    return value.subscribe_pipiline(base_pipeline)\
+                .subscribe_consumer(save_result)
+
+```
+
+### Call another pipeline
+
+Inside your pipeline, you can use any other pipelines. 
+
+Note: that all pipelines - is a worker, and you can't set worker=False to a pipeline. 
+
+The app and pipelines structure is quite scalable for configuration, you can set new config values when call new pipeline
+
+`value.subscribe_pipiline(base_pipeline, config=dict(path='/home'))`
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+
+---
+
+```python
+
+def custom_function(new_value):
+    return dict(new_value=new_value*2)
+
+
+@app.pipeline()
+def base_pipeline(pipeline, value):
+    return value\
+        .subscribe_func(lambda value: dict(new_value=value+1), name='plus_one')\
+        .subscribe_func(custom_function, as_worker=True)
+
+```
+
+### Subscribe any function you want
+
+It's possible to add any function you want inside your data pipeline. 
+
+If you are using lambda function it's quite important to set name, because otherwise
+if this function will be a worker it will be imposible to recognize it. 
+
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+---
+
+```python
+
+def custom_function(value):
+    return dict(new_value=new_value*2)
+
+
+@app.pipeline()
+def base_pipeline(pipeline, value):
+    return value\
+        .subscribe_func(custom_function)\
+        .add_value(file_path='/tmp/save_data.txt')\
+        .subscribe_consumer(save_to_file, as_worker=True)
+
+```
+
+### Custom values
+
+It's possible to add some additional values (with real data) into your pipeline. 
+
+It useful when you want to configure something. 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+
 ## Flow
 
 
@@ -198,6 +425,15 @@ class MyFlow(Flow)
 
 Flow - It's a low-level component which actually defines data pipeline. 
 
+The problem with data pipelines builders that's it's not quite easy to change/redefine something, also big amount of functions
+makes pipelines like a hell of dependenses (luigi good example of it). <br>
+For solving this problems we have FLOW component which can be used for: <br>
+
+- Easy change/redefine/extend your pipeline. (Just use python inheretence)
+- Easy to configure 
+- Easy to understand what's going on
+- Each Flow could be a worker - Flow have steps which should be run inside some worker
+
 Flow represents data flow graph as a chain of functions called "steps". You can connect those steps simply define "next step" in decorator:
 
 `@step(next_step, next_step ... )`
@@ -208,6 +444,8 @@ The last step in your graph should be defined with next step set to None.
 
 
 All steps executed in one "worker" (process).
+
+The structure of `Flow` class actually insperead by [stepist](https://github.com/electoronick1/stepist)
 
 ---
 
@@ -404,209 +642,7 @@ It's possible to add a new step to the top, insert in the middle or add "save_re
 
 <br><br>
 
-## Pipeline
 
-```python
-
-@app.pipeline()
-def my_pipeline(pipeline, value):
-    return value.subscribe_flow(MyFlow(), as_worker=True) \
-                .subscribe_flow(MySecondFlow())\
-                .subscribe_consumer(save_result)
-
-```
-
-
-
-Pipeline - it's a way to connect multiple flows (or others pipelines) into one big graph/pipeline. 
-
-Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.
-
-To run pipeline (and let data go through pipeline components) run: <br>
-`python manager.py pipelines:run`
-
-It will run all workers and start process your queue (using streaming/queue service).
-
-If you want to run some particular pipeline use following command: <br>
-`python manager.py pipelines:run app_name.pipeline_name` <br>
-
-<br>
-
-![image](images/pipeline_1.svg)
-
-<br><br>
-
----
-
-```python
-
-@app.pipeline()
-def full_pipeline(pipeline, value1, value2, value3):
-
-    # DataFrame
-    all_at_once = concatinate(data_point1=value1,
-                              data_point2=value2,
-                              data_point3=value3)
-
-    # DataFrame
-    my_flow_result = all_at_once.subscribe(MyFlow(), as_worker=True)
-
-    # DataPoint
-    flow_data_point = my_flow_result.get("result_data_point")
-
-    # DataFrame
-    result = flow_data_point.subscribe_flow(MyFlow2())\
-                            .make(result=flow2_result)
-
-    return result
-
-@app.pipeline
-def short_pipeline(pipeline, value1, value2, value3):
-
-    # DataFrame
-    result = concatinate(data_point1=value1, 
-                         data_point2=value2, 
-                         data_point3=value3)\
-             .subscribe(MyFlow(), as_worker=True)\
-             .get("result1")\
-             .subscribe_flow(MyFlow2())\
-             .make(result='result1')\
-
-    return result
-
-```
-
-### Manipulating data inside pipeline
-
-An input of stairs pipeline is a ["mock"](https://en.wikipedia.org/wiki/Mock_object) values called "DataPoint" - it's the representation of the data which will be executed inside pipeline components. 
-
-You can subscribe DataPoint by some Flow component and result of this subscription will be a new object called "DataFrame" 
-- it represents a result of your flow.
-
-You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (the result of your flow) you can use
-`get('value')` method. The result of the "get" method will be DataPoint.
-
-If you want to modify your DataFrame you can use `make(value=new_value)` method and result will be new DataFrame.
-
-Now one of the most interesting part: If you want to combine multiple DataPoints and DataFrame into one DataFrame you can use 
-`concatenate(value1=data_point, value2=data_point2)` function - which return DataFrame with defined arguments. 
-
-
-Here an example of the pipeline -> 
-
-As you can see It's quite simple to define such complex and hard architecture just with 6 lines of code.
-And it's a bit similar to how we define Neural Networks using [Keras](https://keras.io/)
-
-<br>
-
-![image](images/pipeline_2.svg)
-<br><br>
-
----
-
-```python
-
-@app.pipeline()
-def my_pipeline(pipeline, value):
-    return value.subscribe_flow(MyFlow(), as_worker=True) \
-                .apply_flow(MySecondFlow())\
-                .subscribe_consumer(save_result)
-
-```
-
-### How flow change data
-
-Unlike Flow, Pipeline components could accumulate data or completely change/redefine it. 
-
-For this stairs has two defenitions: <br>
-- subscribe_smths <br>
-- apply_smths <br>
-
-subscribe - accomulate/update data <br>
-apply - completely redefine data based on pipeline component result. 
-
-<br><br>
-
-![image](images/pipeline_3.svg)
-
-<br>
-
-
-
----
-
-```python
-
-@app.pipeline()
-def base_pipeline(pipeline, value):
-    return value.subscribe_flow(BaseFlow())
-
-@app.pipeline()
-def my_pipeline(pipeline, value):
-    return value.subscribe_pipiline(base_pipeline)\
-                .subscribe_consumer(save_result)
-
-```
-
-### Call another pipeline
-
-Inside your pipeline, you can use any other pipelines. 
-
-Note: that all pipelines - is a worker, and you can't set worker=False to a pipeline. 
-
-<br><br><br><br><br><br><br><br><br><br><br>
-
-
----
-
-```python
-
-def custom_function(new_value):
-    return dict(new_value=new_value*2)
-
-
-@app.pipeline()
-def base_pipeline(pipeline, value):
-    return value\
-        .subscribe_func(lambda value: dict(new_value=value+1), name='plus_one')\
-        .subscribe_func(custom_function, as_worker=True)
-
-```
-
-### Subscribe any function you want
-
-It's possible to add any function you want inside your data pipeline. 
-
-If you are using lambda function it's quite important to set name, because otherwise
-if this function will be a worker it will be imposible to recognize it. 
-
-
-<br><br><br><br><br><br><br><br><br><br><br>
-
----
-
-```python
-
-def custom_function(value):
-    return dict(new_value=new_value*2)
-
-
-@app.pipeline()
-def base_pipeline(pipeline, value):
-    return value\
-        .subscribe_func(custom_function)\
-        .add_value(file_path='/tmp/save_data.txt')\
-        .subscribe_consumer(save_to_file, as_worker=True)
-
-```
-
-### Custom values
-
-It's possible to add some additional values (with real data) into your pipeline. 
-
-It useful when you want to configure something. 
-
-<br><br><br><br><br><br><br><br><br><br><br>
 
 
 ## Producer
@@ -831,9 +867,107 @@ Here it's also possible to define pipeline config like on example ->
 
 #Examples
 
+##ETL example: hacker news
+
+[github hacker_news](https://github.com/electronick1/stairs_examples/tree/master/hacker_news)<br>
+
+The idea here is to extract data from some source (in that case google cloud), change it somehow and save in a elegant format 
+(for example for creating charts then, or building neural networks).
+
+You can start exploring this project from `producers.py` inside hacker_new app. 
+In this module it's quite trivial where we are reading data, and what format we are using as a result
+
+Then `pipelines.py` each producer will send data to pipelines, in our case we have two of them:<br>
+- `cleanup_and_save_localy` - which makes basic text cleanup and filtering
+- `calculate_stats` - which based on "clean" data calculates some stats which we need
+
+Next (and last) `consumers.py` - the place where all data comes in the end of pipeline.
+
 <br>
 
+##ML example: bag of words
+
+[github bag of words](https://github.com/electronick1/stairs_examples/tree/master/bag_of_words)<br>
+
+He we trying to teach some neural network to solve [kaggle task "Bag of Words Meets Bags of Popcorn"](https://www.kaggle.com/c/word2vec-nlp-tutorial)
+
+This example based on [this repo](https://github.com/wendykan/DeepLearningMovies/) And it's kind of copy-paste solution but to the much more better representation.
+
+What does it means "better representation"? 
+
+If you look inside this repo, it's just a plain code, 
+when you want to make calculations in parrallel way it's not very trivial todo, 
+also if you wnt to change something it's not easy to undestand whole data flow chages.
+
+Stairs solving all of this problems:
+
+- It make calculations in parallel by default
+- You can easelly understand what's going on inside `pipelines.py`
+- It super easy to change something (just redefine some methods in FLow clases)
+
+
 #FAQ
+
+
+## What the reason behind apps?
+
+```python
+
+# example of app config
+
+app = App("myapp")
+app.config.update(
+    train_data_path='/home/train.data'
+)
+
+
+# example of pipeline config
+
+pipeline_config = dict(cleanup_flow=CleanUpText())
+
+@app.pieline(config)
+def external_pipeline(pipeline, value):
+    return value.subscribe_flow(pipeline.config.cleanup_flow)
+
+# in some other app, you can now make like this:
+def my_pipeline(pipeline, value):
+    config = dict(cleanup_flow=MYCleanup())
+    return value.subscribe_pipiline(external_pipeline, config=config)
+
+# And it ^ will be executed with your "clean up" flow 
+
+```
+
+The main idea is to simplify reusing externall solutions.
+
+Data-Science world right now is very none standardized and stairs trying to create enviroment
+where reusing someone approache will be easy and scalable for you. 
+
+For example each app has a config, It's allow you to set different config variables to external apps (inside your app/project).
+
+Each pipeline has a config. It's allow you to redefine some pipeline components or change any logic you want. 
+
+One of the good example of configs it's [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/app_config.py) 
+or [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/pipelines.py#L13)
+
+
+
+## Why pipeline builder using "mocked" data ?
+
+Pipeline builder `app.pipeline()` exists only for creating pipeline, configure it, 
+and return "Worker" object which then will be executed using streaming/queue service. 
+
+At the moment when we are building pipeline, we don't know nothing about real data which comes to it latter, 
+so thats why we aggeread on some mock values and then populate this "mock" values from producer (or other pipeline).
+
+
+## What data should return each pipeline component ?
+
+Except "flow_generator" all components should return `dict` like format. Where we have key:value defined.
+
+It's used for combaning "real" data with "mock" values. 
+
+
 
 
 
