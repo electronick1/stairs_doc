@@ -280,6 +280,23 @@
               </ul>
           </li>
           <li>
+            <a href="#features" class="toc-h1 toc-link" data-title="Features">Features</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#inspect-status-of-your-queues" class="toc-h2 toc-link" data-title="Inspect status of your queues">Inspect status of your queues</a>
+                  </li>
+                  <li>
+                    <a href="#shell" class="toc-h2 toc-link" data-title="Shell">Shell</a>
+                  </li>
+                  <li>
+                    <a href="#change-queue-streaming-server" class="toc-h2 toc-link" data-title="Change queue/streaming server">Change queue/streaming server</a>
+                  </li>
+                  <li>
+                    <a href="#admin-panel" class="toc-h2 toc-link" data-title="Admin panel">Admin panel</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#faq" class="toc-h1 toc-link" data-title="FAQ">FAQ</a>
               <ul class="toc-list-h2">
                   <li>
@@ -1034,6 +1051,73 @@ also if you wnt to change something it&#39;s not easy to undestand whole data fl
 <li>You can easelly understand what&#39;s going on inside <code>pipelines.py</code></li>
 <li>It super easy to change something (just redefine some methods in FLow clases)</li>
 </ul>
+<h1 id='features'>Features</h1><h2 id='inspect-status-of-your-queues'>Inspect status of your queues</h2><pre class="highlight shell"><code>python manager.py inspect:status app_name
+
+<span class="c"># Queue: cleanup_and_save_localy</span>
+<span class="c"># Amount of jobs: 10000</span>
+<span class="c"># Queue decreasing by 101.0 tasks per/sec</span>
+
+
+python manager.py inspect:monitor app_name
+
+<span class="c"># Queue: cleanup_and_save_localy</span>
+<span class="c"># Amount of jobs: 3812</span>
+<span class="c"># New jobs per/sec: 380.4</span>
+<span class="c"># Jobs processed per/sec: 10.0</span>
+
+
+</code></pre>
+<p>There is two types of inspections:</p>
+
+<ul>
+<li>inspect:status - return current amount of jobs/tasks in your queue, and basic information about speed (not very accurate)</li>
+<li>inspect:monitor - return amount jobs added and processed per sec. Accurate, but working only for redis (so far)</li>
+</ul>
+<h2 id='shell'>Shell</h2><pre class="highlight shell"><code>python manager.py shell
+</code></pre><pre class="highlight python tab-python"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">stairs</span> <span class="kn">import</span> <span class="n">get_project</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">get_project</span><span class="p">()</span><span class="o">.</span><span class="n">get_app</span><span class="p">(</span><span class="s">"hacker_news"</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">stairs</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">App</span> <span class="n">at</span> <span class="mh">0x105fa7d30</span><span class="o">&gt;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">get_project</span><span class="p">()</span><span class="o">.</span><span class="n">get_app</span><span class="p">(</span><span class="s">"hacker_news"</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">producers</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+<span class="p">{</span><span class="s">'read_google_big_table'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">stairs</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">producer</span><span class="o">.</span><span class="n">Producer</span> <span class="n">at</span> <span class="mh">0x1257c4828</span><span class="o">&gt;</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">producer</span> <span class="o">=</span> <span class="n">get_project</span><span class="p">()</span><span class="o">.</span><span class="n">get_app</span><span class="p">(</span><span class="s">"hacker_news"</span><span class="p">)</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">producers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"read_google_big_table"</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">producer</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+</code></pre>
+<p>It&#39;s possible to run all producers, pipelines, consumers using ipython.</p>
+<h2 id='change-queue-streaming-server'>Change queue/streaming server</h2><pre class="highlight python tab-python"><code><span class="c"># in manager.py </span>
+
+<span class="kn">from</span> <span class="nn">stepist</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">stairs.services.management</span> <span class="kn">import</span> <span class="n">init_cli</span>
+<span class="kn">from</span> <span class="nn">stairs.core.project</span> <span class="kn">import</span> <span class="n">StairsProject</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">stepist_app</span> <span class="o">=</span> <span class="n">App</span><span class="p">()</span>
+    <span class="n">celery</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="n">broker</span><span class="o">=</span><span class="s">"redis://localhost:6379/0"</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">worker_engine</span> <span class="o">=</span> <span class="n">CeleryAdapter</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">celery</span><span class="p">)</span>
+
+    <span class="n">stairs_project</span> <span class="o">=</span> <span class="n">StairsProject</span><span class="p">(</span><span class="n">stepist_app</span><span class="o">=</span><span class="n">stepist_app</span><span class="p">)</span>
+    <span class="n">stairs_project</span><span class="o">.</span><span class="n">load_config_from_file</span><span class="p">(</span><span class="s">"config.py"</span><span class="p">)</span>
+    <span class="n">init_cli</span><span class="p">()</span>
+</code></pre>
+<p>Stairs is complitely based on stepist. You can just define new stepist app with new &quot;broken&quot; engine, 
+and your stairs project is ready to go </p>
+
+<p><a href="https://github.com/electronick1/stepist">Stepist</a></p>
+<h2 id='admin-panel'>Admin panel</h2><pre class="highlight shell"><code>python manager.py admin
+</code></pre>
+<p>It&#39;s a way to visualize all your pipelines, see status of queues and all information about each pipeline component</p>
+
+<p><img src="images/admin.png" alt="image" /></p>
+
+<aside class="notice">
+Under development
+</aside>
 <h1 id='faq'>FAQ</h1><h2 id='what-the-reason-behind-apps'>What the reason behind apps?</h2><pre class="highlight python tab-python"><code>
 <span class="c"># example of app config</span>
 
