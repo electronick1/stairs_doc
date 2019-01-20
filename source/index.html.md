@@ -906,6 +906,103 @@ Stairs solving all of this problems:
 - It super easy to change something (just redefine some methods in FLow clases)
 
 
+#Features 
+
+## Inspect status of your queues
+
+```bash
+python manager.py inspect:status app_name
+
+# Queue: cleanup_and_save_localy
+# Amount of jobs: 10000
+# Queue decreasing by 101.0 tasks per/sec
+
+
+python manager.py inspect:monitor app_name
+
+# Queue: cleanup_and_save_localy
+# Amount of jobs: 3812
+# New jobs per/sec: 380.4
+# Jobs processed per/sec: 10.0
+
+
+```
+
+There is two types of inspections:
+
+- inspect:status - return current amount of jobs/tasks in your queue, and basic information about speed (not very accurate)
+- inspect:monitor - return amount jobs added and processed per sec. Accurate, but working only for redis (so far)
+
+
+## Shell
+
+
+
+```bash
+python manager.py shell
+```
+
+```python
+
+In [1]: from stairs import get_project
+
+In [2]: get_project().get_app("hacker_news")
+Out[2]: <stairs.core.app.App at 0x105fa7d30>
+
+In [3]: get_project().get_app("hacker_news").components.producers
+Out[3]:
+{'read_google_big_table': <stairs.core.producer.Producer at 0x1257c4828>}
+
+In [4]: producer = get_project().get_app("hacker_news").components.producers.get("read_google_big_table")
+
+In [5]: producer.process()
+
+```
+
+It's possible to run all producers, pipelines, consumers using ipython.
+
+
+## Change queue/streaming server
+
+```python
+# in manager.py 
+
+from stepist import App
+from stairs.services.management import init_cli
+from stairs.core.project import StairsProject
+
+if __name__ == "__main__":
+    stepist_app = App()
+    celery = Celery(broker="redis://localhost:6379/0")
+    app.worker_engine = CeleryAdapter(app, celery)
+
+    stairs_project = StairsProject(stepist_app=stepist_app)
+    stairs_project.load_config_from_file("config.py")
+    init_cli()
+```
+
+
+Stairs is complitely based on stepist. You can just define new stepist app with new "broken" engine, 
+and your stairs project is ready to go 
+
+[Stepist](https://github.com/electronick1/stepist)
+
+
+## Admin panel
+
+```bash
+python manager.py admin
+```
+
+It's a way to visualize all your pipelines, see status of queues and all information about each pipeline component
+
+
+![image](images/admin.png)
+
+<aside class="notice">
+Under development
+</aside>
+
 #FAQ
 
 
