@@ -14,13 +14,17 @@ search: true
 
 # Welcome
 
-Stairs - It's a simple tool which allows you to juggle with data. 
+Stairs is a simple tool which allows you to slice and dice and make sense of 
+your data. 
 
-You can build data pipelines and make parallel/async/distributed calculations for most of your data related tasks.
+You can build data pipelines and make parallel, async or distributed calculations 
+for most of your data related tasks.
 
-Stairs available on Python3, but you can handle data calculation on any languages. And even use any of Streaming/Queue services which you want. 
+Stairs available for Python3, but you can write data processors in any language. 
+You can also use any of streaming or queue services which you want. 
 
-It's easy to start, test all your ideas/hypotheses in rocket way and it will be ready for production at any moment of time without special magic. 
+It's easy to start, test all your ideas or hypotheses in a quick way and it is 
+ready for immediate use without any special magic. 
 
 Get started with Installation and then get an overview with "Get started". 
 
@@ -37,15 +41,16 @@ pip install stairs-project
 
 
 
-> It's recommended to use latest python 3 version
+> It's recommended to use the latest python 3 version
 
-Just make `pip install stairs-project` to install all python dependencies.
+Just make `pip install stairs-project` to install stairs along with all 
+python dependencies.
 
-Stairs require redis, for storing statistic and some meta information, 
-even tho you will use different streaming/queue service. 
+Stairs requires redis for storing statistic and some meta-information, 
+even if you use different streaming or queue service. 
 
 <aside class="notice">
-You must install <code>redis</code> for stairs.
+Stairs requires a running redis server to work
 </aside>
 
 # Mission
@@ -57,11 +62,9 @@ You must install <code>redis</code> for stairs.
 The main Stairs focus is data pipelines. It's a framework which helps you to
 build and manipulate data through the data flow graph. 
 
-
-In the same way, you can associate stairs with MVP framework (like Django) but for data pipelines.
-Different layers of abstractions and components allow you to build any kind of data flow graph,
-and easily understand what's going on in your system. 
-
+You can think of it as of an MVP framework (like Django) for data pipelines.
+Different layers of abstractions and components allow you to build any kind of 
+data flow graph and easily understand what's going on in your system. 
 
 
 ## Parallel/Async/Distributed
@@ -73,7 +76,7 @@ with each other using streaming/queues services and together could process your 
 
 Right now stairs using: <br>
 - celery <br>
-- self implemented redis queue <br>
+- self-implemented redis queue <br>
 - kafka (under development) <br>
 
 There is interesting wiki article about workers/jobs -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
