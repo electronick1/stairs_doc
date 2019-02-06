@@ -320,13 +320,17 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Stairs - It&#39;s a simple tool which allows you to juggle with data. </p>
+<p>Stairs is a simple tool which allows you to slice and dice and make sense of 
+your data. </p>
 
-<p>You can build data pipelines and make parallel/async/distributed calculations for most of your data related tasks.</p>
+<p>You can build data pipelines and make parallel, async or distributed calculations 
+for most of your data related tasks.</p>
 
-<p>Stairs available on Python3, but you can handle data calculation on any languages. And even use any of Streaming/Queue services which you want. </p>
+<p>Stairs available for Python3, but you can write data processors in any language. 
+You can also use any of streaming or queue services which you want. </p>
 
-<p>It&#39;s easy to start, test all your ideas/hypotheses in rocket way and it will be ready for production at any moment of time without special magic. </p>
+<p>It&#39;s easy to start, test all your ideas or hypotheses in a quick way and it is 
+ready for immediate use without any special magic. </p>
 
 <p>Get started with Installation and then get an overview with &quot;Get started&quot;. </p>
 <h1 id='installation'>Installation</h1><pre class="highlight python tab-python"><code><span class="c"># install redis https://redis.io/topics/quickstart</span>
@@ -336,16 +340,17 @@
 <span class="n">pip</span> <span class="n">install</span> <span class="n">stairs</span><span class="o">-</span><span class="n">project</span>
 </code></pre>
 <blockquote>
-<p>It&#39;s recommended to use latest python 3 version</p>
+<p>It&#39;s recommended to use the latest python 3 version</p>
 </blockquote>
 
-<p>Just make <code>pip install stairs-project</code> to install all python dependencies.</p>
+<p>Just make <code>pip install stairs-project</code> to install stairs along with all 
+python dependencies.</p>
 
-<p>Stairs require redis, for storing statistic and some meta information, 
-even tho you will use different streaming/queue service. </p>
+<p>Stairs requires redis for storing statistic and some meta-information, 
+even if you use different streaming or queue service. </p>
 
 <aside class="notice">
-You must install <code>redis</code> for stairs.
+Stairs requires a running redis server to work
 </aside>
 <h1 id='mission'>Mission</h1><h2 id='data-pipelines'>Data Pipelines</h2>
 <!-- > ![image](images/data_pipeline.png) -->
@@ -353,37 +358,43 @@ You must install <code>redis</code> for stairs.
 <p>The main Stairs focus is data pipelines. It&#39;s a framework which helps you to
 build and manipulate data through the data flow graph. </p>
 
-<p>In the same way, you can associate stairs with MVP framework (like Django) but for data pipelines.
-Different layers of abstractions and components allow you to build any kind of data flow graph,
-and easily understand what&#39;s going on in your system. </p>
+<p>You can think of it as of an MVP framework (like Django) for data pipelines.
+Different layers of abstractions and components allow you to build any kind of 
+data flow graph and easily understand what&#39;s going on in your system. </p>
 <h2 id='parallel-async-distributed'>Parallel/Async/Distributed</h2>
 <!-- > ![parallel](images/parallel.png) -->
 
-<p>Each component of data pipeline could be represented as a separate python process (worker). Each component comunicates
-with each other using streaming/queues services and together could process your data in a parallel way.</p>
+<p>Each component of data pipeline could be represented as a separate python 
+process (worker). Each component comunicates with each other using 
+streaming/queues services and together could process your data in a parallel way.</p>
 
 <p>Right now stairs using: <br>
 - celery <br>
-- self implemented redis queue <br>
+- self-implemented redis queue <br>
 - kafka (under development) <br></p>
 
-<p>There is interesting wiki article about workers/jobs -&gt; <a href="https://en.wikipedia.org/wiki/Job_(computing)">Wiki</a></p>
+<p>There is interesting wiki article about workers/jobs 
+-&gt; <a href="https://en.wikipedia.org/wiki/Job_(computing)">Wiki</a></p>
 
-<p>Stairs framework focusing on speed and light, and speed of your &quot;workers&quot; mostly limited by your streaming/queues service.</p>
+<p>Stairs framework focusing on speed and light, and speed 
+of your &quot;workers&quot; mostly limited by your streaming/queues service.</p>
 <h2 id='for-data-science-and-data-engineering-with-love'>For data-science and data-engineering with love</h2>
 <!-- > ![ds_en](images/ds_en.svg) -->
 
-<p>Data-science and data-engineering growing fast, and it&#39;s hard to be expert on everything
-at the same time. </p>
+<p>Data-science and data-engineering growing fast, and it&#39;s hard 
+to be expert on everything at the same time. </p>
 
-<p>For example to train ML models, you should spend about 80% of the time to process data -- how fast 
-you will be able to process your data and test all hypotheses, directly influence your final result.</p>
+<p>For example to train ML models, you should spend about 80% of the time 
+to process data -- how fast you will be able to process your data and test 
+all hypotheses, directly influence your final result.</p>
 
-<p>Stairs allows data scientist to build &quot;scalable&quot; solutions without high-level data-engineering skills.</p>
+<p>Stairs allows data scientist to build &quot;scalable&quot; solutions without 
+high-level data-engineering skills.</p>
 
 <ul>
 <li>Data-scientist could focus only on data processing</li>
-<li>Data-engineer could focus only on storing and moving data (between pipeline components)</li>
+<li>Data-engineer could focus only on storing and moving data 
+(between pipeline components)</li>
 </ul>
 <h1 id='get-started'>Get started</h1><h2 id='project'>Project</h2><pre class="highlight shell tab-shell"><code>stairs-admin project:new name
 </code></pre>
@@ -393,9 +404,11 @@ you will be able to process your data and test all hypotheses, directly influenc
 
 <p>When you done with installation let&#39;s try to kick-start your first stairs project.</p>
 
-<p>Stairs project kind similar to django approach (when you can create default project template). 
-To have better overview of your components you can create similar project in stairs. It will contain apps with all basic layears inside. <bt>
-But you completely free to use another structure which you want. Default project template is just a way to quikly kick start your idea. </p>
+<p>Stairs project kind similar to django approach (when you can create default 
+project template). To have better overview of your components you can create 
+similar project in stairs. It will contain apps with all basic layears inside. <bt>
+But you completely free to use another structure which you want. Default 
+project template is just a way to quikly kick start your idea. </p>
 
 <p>For creating default project template just use the following command:</p>
 
@@ -405,7 +418,8 @@ But you completely free to use another structure which you want. Default project
 
 <p>The project has a config file and &quot;manager.py&quot;.</p>
 
-<p>&quot;manager.py&quot; - in Django manner allows you to read config, detect apps and execute shell commands.</p>
+<p>&quot;manager.py&quot; - in Django manner allows you to read config, detect apps and 
+execute shell commands.</p>
 
 <p><br><br><br><br><br><br></p>
 <h2 id='app'>App</h2><pre class="highlight shell tab-shell"><code>stairs-admin app:new name
@@ -414,20 +428,27 @@ But you completely free to use another structure which you want. Default project
 <p><img src="images/app.svg" alt="app" /></p>
 </blockquote>
 
-<p>App - it&#39;s a way to generalize different approaches to one similar form - why? Because right now
-data-science approaches too scattered and it&#39;s hard to understand what&#39;s going on when you have
-a ton of maths and algorithms around. </p>
+<p>App - it&#39;s a way to generalize different approaches to one similar form - why? 
+Because right now data-science approaches too scattered and it&#39;s hard to 
+understand what&#39;s going on when you have a ton of maths and algorithms around. </p>
 
 <p>Each app has the following components:</p>
 
 <ul>
-<li><p>pipeline - represents a data flow graph and determines how the data will be processed. Each pipeline consists of multiple smaller components like &quot;Flow&quot; (Data flow).  </p></li>
-<li><p>producer - function which helps you to read the source (file, database ...) and then follow it to data pipeline.</p></li>
-<li><p>consumer - function which writes data to data store or change &quot;global state&quot;.</p></li>
-<li><p>flow (Data Flow) - set of functions (called <a href="https://en.wikipedia.org/wiki/Job_(computing)">steps</a>) which could change/filter/populate your data.</p></li>
+<li><p>pipeline - represents a data flow graph and determines how the data 
+will be processed. Each pipeline consists of multiple smaller components 
+like &quot;Flow&quot; (Data flow).  </p></li>
+<li><p>producer - function which helps you to read the source 
+(file, database ...) and then follow it to data pipeline.</p></li>
+<li><p>consumer - function which writes data to data store 
+or change &quot;global state&quot;.</p></li>
+<li><p>flow (Data Flow) - set of functions 
+(called <a href="https://en.wikipedia.org/wiki/Job_(computing)">steps</a>
+which could change/filter/populate your data.</p></li>
 </ul>
 
-<p>To create new &quot;default&quot; app use following command:</p>
+<p>To create new &quot;default app&quot; structure (with package and modules) 
+type following command:</p>
 
 <p><code>stairs-admin app:new name</code></p>
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">stairs</span> <span class="kn">import</span> <span class="n">App</span>
@@ -435,9 +456,13 @@ a ton of maths and algorithms around. </p>
 <span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"my_app"</span><span class="p">)</span>
 
 </code></pre>
-<p>To define your app you should initialize App object with name and config (More about app config in &quot;App components&quot; section).</p>
+<p>To define your app you should initialize App object with name and config 
+(More about app config in &quot;App components&quot; section).
+You can find this app object in &quot;app_config.py&quot; file inside default app. 
+Don&#39;t forget to change it name. </p>
 
-<p>If you want to add a new app to the project, populate <code>apps</code> variable in the config file or use <code>StairsProject.add_app(app)</code></p>
+<p>If you want to add a new app to the project, populate 
+<code>apps</code> variable in the config file or use <code>StairsProject().add_app(app)</code></p>
 
 <p><br></p>
 
@@ -551,15 +576,18 @@ And it&#39;s a bit similar to how we define Neural Networks using <a href="https
                 <span class="o">.</span><span class="n">apply_flow</span><span class="p">(</span><span class="n">MySecondFlow</span><span class="p">())</span>\
                 <span class="o">.</span><span class="n">subscribe_consumer</span><span class="p">(</span><span class="n">save_result</span><span class="p">)</span>
 
-</code></pre><h3 id='how-flow-change-data'>How flow change data</h3>
+</code></pre><h3 id='how-pipeline-flow-change-data'>How pipeline flow change data</h3>
 <p>Pipeline components could accumulate data or completely change/redefine it. </p>
 
-<p>For this stairs has two defenitions: <br>
+<p>For this stairs has two definitions: <br>
 - subscribe_smths <br>
 - apply_smths <br></p>
 
-<p>subscribe - accomulate/update data <br>
+<p>subscribe - accumulate/update data <br>
 apply - completely redefine data based on pipeline component result. </p>
+
+<p>Take into consideration that result of each component is a dict object, which
+&quot;accumulate&quot; by updating dict keys and values</p>
 
 <p><br><br></p>
 
@@ -571,21 +599,35 @@ apply - completely redefine data based on pipeline component result. </p>
 <pre class="highlight python tab-python"><code>
 <span class="nd">@app.pipeline</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">base_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_flow</span><span class="p">(</span><span class="n">BaseFlow</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_flow</span><span class="p">(</span><span class="n">BaseFlow</span><span class="p">(</span><span class="o">**</span><span class="n">pipeline</span><span class="o">.</span><span class="n">config</span><span class="p">))</span>
 
 <span class="nd">@app.pipeline</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">my_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_pipiline</span><span class="p">(</span><span class="n">base_pipeline</span><span class="p">)</span>\
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_pipeline</span><span class="p">(</span><span class="n">base_pipeline</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">subscribe_consumer</span><span class="p">(</span><span class="n">save_result</span><span class="p">)</span>
+
+<span class="nd">@app.pipeline</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">my_pipeline_with_config</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">use_lower</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_pipeline</span><span class="p">(</span><span class="n">base_pipeline</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">subscribe_consumer</span><span class="p">(</span><span class="n">save_result</span><span class="p">)</span>
 
 </code></pre><h3 id='call-another-pipeline'>Call another pipeline</h3>
-<p>Inside your pipeline, you can use any other pipelines. </p>
+<p>Each stairs pipeline is a worker which handle jobs in a separate process.<br>
+Inside your pipeline, you can use any other pipelines and send data between
+them using queue/streaming service. </p>
 
-<p>Note: that all pipelines - is a worker, and you can&#39;t set worker=False to a pipeline. </p>
+<p>Note: you can&#39;t set worker=False to a pipeline. </p>
 
-<p>The app and pipelines structure is quite scalable for configuration, you can set new config values when call new pipeline</p>
+<p>One of the core feature inside pipelines is a scalable way to configure them. 
+The app and pipelines structure is quite friendly for configuration, 
+you can set new config values when call new pipeline</p>
 
-<p><code>value.subscribe_pipiline(base_pipeline, config=dict(path=&#39;/home&#39;))</code></p>
+<p><code>value.subscribe_pipeline(base_pipeline, config=dict(path=&#39;/home&#39;))</code></p>
+
+<p>This values will be available inside <code>base_pipeline</code> as:</p>
+
+<p><code>pipeline.config.get(&#39;path&#39;)</code></p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
 
@@ -605,7 +647,9 @@ apply - completely redefine data based on pipeline component result. </p>
 <p>It&#39;s possible to add any function you want inside your data pipeline. </p>
 
 <p>If you are using lambda function it&#39;s quite important to set name, because otherwise
-if this function will be a worker it will be imposible to recognize it. </p>
+if this function will be a worker it will be impossible to recognize it. </p>
+
+<p>Note: that all functions should return <code>dict</code> object.</p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
 
@@ -625,7 +669,10 @@ if this function will be a worker it will be imposible to recognize it. </p>
 </code></pre><h3 id='custom-values'>Custom values</h3>
 <p>It&#39;s possible to add some additional values (with real data) into your pipeline. </p>
 
-<p>It useful when you want to configure something. </p>
+<p>It useful when you want to configure something with constant variables or using
+pipeline config:</p>
+
+<p><code>data.add_value(pipeline.config.get(&#39;url&#39;))</code></p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
 <h2 id='flow'>Flow</h2><pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MyFlow</span><span class="p">(</span><span class="n">Flow</span><span class="p">)</span>
@@ -639,8 +686,9 @@ if this function will be a worker it will be imposible to recognize it. </p>
 </code></pre>
 <p>Flow - It&#39;s a low-level component which actually defines data pipeline. </p>
 
-<p>The problem with data pipelines builders that&#39;s it&#39;s not quite easy to change/redefine something, also big amount of functions
-makes pipelines like a hell of dependenses (luigi good example of it). <br>
+<p>The problem with data pipelines builders that&#39;s it&#39;s not quite easy to 
+change/redefine something, also big amount of functions
+makes pipelines like a hell of dependences (luigi good example of it). <br>
 For solving this problems we have FLOW component which can be used for: <br></p>
 
 <ul>
@@ -663,7 +711,7 @@ For solving this problems we have FLOW component which can be used for: <br></p>
 <p>The structure of <code>Flow</code> class actually insperead by <a href="https://github.com/electoronick1/stepist">stepist</a></p>
 
 <hr>
-<pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MyFlow</span><span class="p">(</span><span class="n">Flow</span><span class="p">)</span>
+<pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MyFlow</span><span class="p">(</span><span class="n">Flow</span><span class="p">):</span>
     <span class="nd">@step</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">third_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">first_step_result</span><span class="p">,</span> <span class="n">second_step_result</span><span class="p">):</span>
         <span class="c"># which actually means value * 3</span>
@@ -680,12 +728,15 @@ For solving this problems we have FLOW component which can be used for: <br></p>
 </code></pre>
 <p>The input for the next step is output from the current. </p>
 
-<p>Result of each step is accumulating, this means that from any low-level steps you will be able to get values from high-level steps:</p>
+<p>This idea is based on <a href="https://github.com/electronick1/stepist">stepist</a></p>
+
+<p>Result of each step is accumulating, this means that from any low-level steps 
+you will be able to get values from high-level steps.</p>
 
 <p><br><br><br><br><br><br><br><br><br><br></p>
 
 <hr>
-<pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MyFlow</span><span class="p">(</span><span class="n">Flow</span><span class="p">)</span>
+<pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MyFlow</span><span class="p">(</span><span class="n">Flow</span><span class="p">):</span>
     <span class="nd">@step</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">second_step_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
@@ -701,7 +752,8 @@ For solving this problems we have FLOW component which can be used for: <br></p>
         <span class="c"># data from root1 and root2 will be merge into current step</span>
         <span class="k">pass</span>
 </code></pre>
-<p>You can define multiple &quot;next&quot; steps and this will allow you to build complex branched out pipelines, like on example bellow -&gt;</p>
+<p>You can define multiple &quot;next&quot; steps and this will allow you to build complex 
+branched out pipelines, like on example bellow -&gt;</p>
 
 <p><img src="images/flow1.svg" alt="image" />
 <br><br><br><br><br></p>
@@ -727,9 +779,10 @@ For solving this problems we have FLOW component which can be used for: <br></p>
         <span class="k">return</span> <span class="n">value</span> <span class="o">**</span> <span class="mi">2</span>
 
 </code></pre>
-<p>Now, to execute your flow class you should have <code>__call__</code> methoud defenied. </p>
+<p>Now, to execute your flow class you should have <code>__call__</code> method defenied. </p>
 
-<p>Inside <code>__call__</code> you can execute any step from your flow. Then whole chain (pipeline) of steps will be executed. </p>
+<p>Inside <code>__call__</code> you can execute any step from your flow. Then whole chain 
+(pipeline) of steps will be executed. </p>
 
 <p><code>self.mystep(**kwargs_for_highest_step)</code></p>
 
@@ -1138,7 +1191,7 @@ Under development
 <span class="c"># in some other app, you can now make like this:</span>
 <span class="k">def</span> <span class="nf">my_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cleanup_flow</span><span class="o">=</span><span class="n">MYCleanup</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_pipiline</span><span class="p">(</span><span class="n">external_pipeline</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">subscribe_pipeline</span><span class="p">(</span><span class="n">external_pipeline</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
 
 <span class="c"># And it ^ will be executed with your "clean up" flow </span>
 
