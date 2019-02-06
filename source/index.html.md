@@ -342,7 +342,7 @@ def base_pipeline(pipeline, value):
 
 @app.pipeline()
 def my_pipeline(pipeline, value):
-    return value.subscribe_pipiline(base_pipeline)\
+    return value.subscribe_pipeline(base_pipeline)\
                 .subscribe_consumer(save_result)
 
 ```
@@ -355,7 +355,7 @@ Note: that all pipelines - is a worker, and you can't set worker=False to a pipe
 
 The app and pipelines structure is quite scalable for configuration, you can set new config values when call new pipeline
 
-`value.subscribe_pipiline(base_pipeline, config=dict(path='/home'))`
+`value.subscribe_pipeline(base_pipeline, config=dict(path='/home'))`
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
@@ -1032,7 +1032,7 @@ def external_pipeline(pipeline, value):
 # in some other app, you can now make like this:
 def my_pipeline(pipeline, value):
     config = dict(cleanup_flow=MYCleanup())
-    return value.subscribe_pipiline(external_pipeline, config=config)
+    return value.subscribe_pipeline(external_pipeline, config=config)
 
 # And it ^ will be executed with your "clean up" flow 
 
