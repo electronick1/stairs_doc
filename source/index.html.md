@@ -71,33 +71,39 @@ data flow graph and easily understand what's going on in your system.
 
 <!-- > ![parallel](images/parallel.png) -->
 
-Each component of data pipeline could be represented as a separate python process (worker). Each component comunicates
-with each other using streaming/queues services and together could process your data in a parallel way.
+Each component of data pipeline could be represented as a separate python 
+process (worker). Each component comunicates with each other using 
+streaming/queues services and together could process your data in a parallel way.
 
 Right now stairs using: <br>
 - celery <br>
 - self-implemented redis queue <br>
 - kafka (under development) <br>
 
-There is interesting wiki article about workers/jobs -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
+There is interesting wiki article about workers/jobs 
+-> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
 
-Stairs framework focusing on speed and light, and speed of your "workers" mostly limited by your streaming/queues service.
+Stairs framework focusing on speed and light, and speed 
+of your "workers" mostly limited by your streaming/queues service.
 
 
 ## For data-science and data-engineering with love
 
 <!-- > ![ds_en](images/ds_en.svg) -->
 
-Data-science and data-engineering growing fast, and it's hard to be expert on everything
-at the same time. 
+Data-science and data-engineering growing fast, and it's hard 
+to be expert on everything at the same time. 
 
-For example to train ML models, you should spend about 80% of the time to process data -- how fast 
-you will be able to process your data and test all hypotheses, directly influence your final result.
+For example to train ML models, you should spend about 80% of the time 
+to process data -- how fast you will be able to process your data and test 
+all hypotheses, directly influence your final result.
 
-Stairs allows data scientist to build "scalable" solutions without high-level data-engineering skills.
+Stairs allows data scientist to build "scalable" solutions without 
+high-level data-engineering skills.
 
 - Data-scientist could focus only on data processing
-- Data-engineer could focus only on storing and moving data (between pipeline components)
+- Data-engineer could focus only on storing and moving data 
+(between pipeline components)
 
 
 #Get started
@@ -114,9 +120,11 @@ stairs-admin project:new name
 
 When you done with installation let's try to kick-start your first stairs project.
 
-Stairs project kind similar to django approach (when you can create default project template). 
-To have better overview of your components you can create similar project in stairs. It will contain apps with all basic layears inside. <bt>
-But you completely free to use another structure which you want. Default project template is just a way to quikly kick start your idea. 
+Stairs project kind similar to django approach (when you can create default 
+project template). To have better overview of your components you can create 
+similar project in stairs. It will contain apps with all basic layears inside. <bt>
+But you completely free to use another structure which you want. Default 
+project template is just a way to quikly kick start your idea. 
 
 
 For creating default project template just use the following command:
@@ -128,7 +136,8 @@ This command will generate a basic project structure with one app inside.<br>
 
 The project has a config file and "manager.py".
 
-"manager.py" - in Django manner allows you to read config, detect apps and execute shell commands.
+"manager.py" - in Django manner allows you to read config, detect apps and 
+execute shell commands.
 
 
 <br><br><br><br><br><br>
@@ -145,25 +154,31 @@ stairs-admin app:new name
 > ![app](images/app.svg)
 
 
-App - it's a way to generalize different approaches to one similar form - why? Because right now
-data-science approaches too scattered and it's hard to understand what's going on when you have
-a ton of maths and algorithms around. 
+App - it's a way to generalize different approaches to one similar form - why? 
+Because right now data-science approaches too scattered and it's hard to 
+understand what's going on when you have a ton of maths and algorithms around. 
 
 
 Each app has the following components:
 
-- pipeline - represents a data flow graph and determines how the data will be processed. Each pipeline consists of multiple smaller components like "Flow" (Data flow).  
+- pipeline - represents a data flow graph and determines how the data 
+will be processed. Each pipeline consists of multiple smaller components 
+like "Flow" (Data flow).  
 
-- producer - function which helps you to read the source (file, database ...) and then follow it to data pipeline.
+- producer - function which helps you to read the source 
+(file, database ...) and then follow it to data pipeline.
 
-- consumer - function which writes data to data store or change "global state".
+- consumer - function which writes data to data store 
+or change "global state".
 
-- flow (Data Flow) - set of functions (called [steps](https://en.wikipedia.org/wiki/Job_(computing))) which could change/filter/populate your data.
+- flow (Data Flow) - set of functions 
+(called [steps](https://en.wikipedia.org/wiki/Job_(computing))
+which could change/filter/populate your data.
 
 
 
-
-To create new "default" app use following command:
+To create new "default app" structure (with package and modules) 
+type following command:
 
 `stairs-admin app:new name`
 
@@ -176,9 +191,13 @@ app = App(name="my_app")
 
 ```
 
-To define your app you should initialize App object with name and config (More about app config in "App components" section).
+To define your app you should initialize App object with name and config 
+(More about app config in "App components" section).
+You can find this app object in "app_config.py" file inside default app. 
+Don't forget to change it name. 
 
-If you want to add a new app to the project, populate `apps` variable in the config file or use `StairsProject.add_app(app)`
+If you want to add a new app to the project, populate 
+`apps` variable in the config file or use `StairsProject().add_app(app)`
 
 <br>
 
@@ -313,16 +332,19 @@ def my_pipeline(pipeline, value):
 
 ```
 
-### How flow change data
+### How pipeline flow change data
 
 Pipeline components could accumulate data or completely change/redefine it. 
 
-For this stairs has two defenitions: <br>
+For this stairs has two definitions: <br>
 - subscribe_smths <br>
 - apply_smths <br>
 
-subscribe - accomulate/update data <br>
+subscribe - accumulate/update data <br>
 apply - completely redefine data based on pipeline component result. 
+
+Take into consideration that result of each component is a dict object, which
+"accumulate" by updating dict keys and values
 
 <br><br>
 
@@ -338,24 +360,39 @@ apply - completely redefine data based on pipeline component result.
 
 @app.pipeline()
 def base_pipeline(pipeline, value):
-    return value.subscribe_flow(BaseFlow())
+    return value.subscribe_flow(BaseFlow(**pipeline.config))
 
 @app.pipeline()
 def my_pipeline(pipeline, value):
     return value.subscribe_pipeline(base_pipeline)\
+                .subscribe_consumer(save_result)
+                
+@app.pipeline()
+def my_pipeline_with_config(pipeline, value):
+    config = dict(use_lower=True)
+    return value.subscribe_pipeline(base_pipeline, config=config)\
                 .subscribe_consumer(save_result)
 
 ```
 
 ### Call another pipeline
 
-Inside your pipeline, you can use any other pipelines. 
+Each stairs pipeline is a worker which handle jobs in a separate process.  
+Inside your pipeline, you can use any other pipelines and send data between
+them using queue/streaming service. 
 
-Note: that all pipelines - is a worker, and you can't set worker=False to a pipeline. 
+Note: you can't set worker=False to a pipeline. 
 
-The app and pipelines structure is quite scalable for configuration, you can set new config values when call new pipeline
+One of the core feature inside pipelines is a scalable way to configure them. 
+The app and pipelines structure is quite friendly for configuration, 
+you can set new config values when call new pipeline
 
 `value.subscribe_pipeline(base_pipeline, config=dict(path='/home'))`
+
+This values will be available inside `base_pipeline` as:
+
+`pipeline.config.get('path')`
+
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
@@ -381,8 +418,9 @@ def base_pipeline(pipeline, value):
 It's possible to add any function you want inside your data pipeline. 
 
 If you are using lambda function it's quite important to set name, because otherwise
-if this function will be a worker it will be imposible to recognize it. 
+if this function will be a worker it will be impossible to recognize it. 
 
+Note: that all functions should return `dict` object.
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
@@ -407,7 +445,10 @@ def base_pipeline(pipeline, value):
 
 It's possible to add some additional values (with real data) into your pipeline. 
 
-It useful when you want to configure something. 
+It useful when you want to configure something with constant variables or using
+pipeline config:
+
+`data.add_value(pipeline.config.get('url'))`
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
@@ -428,8 +469,9 @@ class MyFlow(Flow)
 
 Flow - It's a low-level component which actually defines data pipeline. 
 
-The problem with data pipelines builders that's it's not quite easy to change/redefine something, also big amount of functions
-makes pipelines like a hell of dependenses (luigi good example of it). <br>
+The problem with data pipelines builders that's it's not quite easy to 
+change/redefine something, also big amount of functions
+makes pipelines like a hell of dependences (luigi good example of it). <br>
 For solving this problems we have FLOW component which can be used for: <br>
 
 - Easy change/redefine/extend your pipeline. (Just use python inheretence)
@@ -453,7 +495,7 @@ The structure of `Flow` class actually insperead by [stepist](https://github.com
 ---
 
 ```python
-class MyFlow(Flow)
+class MyFlow(Flow):
     @step(None)
     def third_step(self, value, first_step_result, second_step_result):
         # which actually means value * 3
@@ -471,14 +513,17 @@ class MyFlow(Flow)
 
 The input for the next step is output from the current. 
 
-Result of each step is accumulating, this means that from any low-level steps you will be able to get values from high-level steps:
+This idea is based on [stepist](https://github.com/electronick1/stepist)
+
+Result of each step is accumulating, this means that from any low-level steps 
+you will be able to get values from high-level steps.
 
 <br><br><br><br><br><br><br><br><br><br>
 
 ---
 
 ```python
-class MyFlow(Flow)
+class MyFlow(Flow):
     @step(None)
     def second_step_2(self):
         pass
@@ -495,7 +540,8 @@ class MyFlow(Flow)
         pass
 ```
 
-You can define multiple "next" steps and this will allow you to build complex branched out pipelines, like on example bellow ->
+You can define multiple "next" steps and this will allow you to build complex 
+branched out pipelines, like on example bellow ->
 
 ![image](images/flow1.svg)
 <br><br><br><br><br>
@@ -524,9 +570,10 @@ class MyFlow(Flow):
             
 ```
 
-Now, to execute your flow class you should have `__call__` methoud defenied. 
+Now, to execute your flow class you should have `__call__` method defenied. 
 
-Inside `__call__` you can execute any step from your flow. Then whole chain (pipeline) of steps will be executed. 
+Inside `__call__` you can execute any step from your flow. Then whole chain 
+(pipeline) of steps will be executed. 
 
 `self.mystep(**kwargs_for_highest_step)`
 
