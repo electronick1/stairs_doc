@@ -267,7 +267,7 @@ def full_pipeline(pipeline, value1, value2, value3):
 
     # DataFrame
     result = flow_data_point.subscribe_flow(MyFlow2())\
-                            .make(result=flow2_result)
+                            .rename(result=flow2_result)
 
     return result
 
@@ -281,7 +281,7 @@ def short_pipeline(pipeline, value1, value2, value3):
              .subscribe_func(my_function, as_worker=True)\
              .get("result1")\
              .subscribe_flow(MyFlow2())\
-             .make(result='result1')\
+             .rename(result='result1')\
 
     return result
 
@@ -304,7 +304,8 @@ You can subscribe DataPoint by some function or Flow component and result of thi
 You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (the result of your flow) you can use
 `get('value')` method. The result of the "get" method will be DataPoint.
 
-If you want to modify your DataFrame you can use `make(value=new_value)` method and result will be new DataFrame.
+If you want to modify your DataFrame you can use `rename(new_key=old_key)` method and result will be new DataFrame. 
+`rename` methods change the key name (DataPoint inside DataFrame).
 
 Now one of the most interesting part: If you want to combine multiple DataPoints and DataFrame into one DataFrame you can use 
 `concatenate(value1=data_point, value2=data_point2)` function - which return DataFrame with defined arguments. 
@@ -675,8 +676,8 @@ class MyFlow2(MyFlow):
 
     def __reconect__(self):
         self.second_step.set_next(self.third_step)
-        self.second_step.save_result = True
-
+        self.second_step.set(save_result=True)
+        
     @step(None)
     def third_step(self, value):
         return dict(power4=value ** 4)
