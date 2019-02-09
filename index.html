@@ -519,7 +519,7 @@ and manipulate.</p>
 
     <span class="c"># DataFrame</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">flow_data_point</span><span class="o">.</span><span class="n">subscribe_flow</span><span class="p">(</span><span class="n">MyFlow2</span><span class="p">())</span>\
-                            <span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">flow2_result</span><span class="p">)</span>
+                            <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">flow2_result</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span>
 
@@ -533,7 +533,7 @@ and manipulate.</p>
              <span class="o">.</span><span class="n">subscribe_func</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">as_worker</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>\
              <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"result1"</span><span class="p">)</span>\
              <span class="o">.</span><span class="n">subscribe_flow</span><span class="p">(</span><span class="n">MyFlow2</span><span class="p">())</span>\
-             <span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="s">'result1'</span><span class="p">)</span>\
+             <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="s">'result1'</span><span class="p">)</span>\
 
     <span class="k">return</span> <span class="n">result</span>
 
@@ -553,7 +553,8 @@ and manipulate.</p>
 <p>You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (the result of your flow) you can use
 <code>get(&#39;value&#39;)</code> method. The result of the &quot;get&quot; method will be DataPoint.</p>
 
-<p>If you want to modify your DataFrame you can use <code>make(value=new_value)</code> method and result will be new DataFrame.</p>
+<p>If you want to modify your DataFrame you can use <code>rename(new_key=old_key)</code> method and result will be new DataFrame. 
+<code>rename</code> methods change the key name (DataPoint inside DataFrame).</p>
 
 <p>Now one of the most interesting part: If you want to combine multiple DataPoints and DataFrame into one DataFrame you can use 
 <code>concatenate(value1=data_point, value2=data_point2)</code> function - which return DataFrame with defined arguments. </p>
@@ -873,7 +874,7 @@ Just set <code>save_result</code> flag to True. </p>
 
     <span class="k">def</span> <span class="nf">__reconect__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">second_step</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">third_step</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">second_step</span><span class="o">.</span><span class="n">save_result</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">second_step</span><span class="o">.</span><span class="nb">set</span><span class="p">(</span><span class="n">save_result</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="nd">@step</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">third_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
