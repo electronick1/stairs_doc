@@ -6,6 +6,8 @@ language_tabs:
 
 toc_footers:
   - <a href='https://github.com/electronick1/stairs'>Stairs on github</a>
+  - <a href='https://github.com/electronick1/stairs_examples'>Stairs examples</a>
+  - <a href='https://github.com/electronick1/stairs_doc'>Stairs doc repo</a>
   - <a href='https://github.com/electronick1/stepist'>Stepist on github</a>
 
 
