@@ -1118,6 +1118,44 @@ Except "flow_generator" all components should return `dict` like format. Where w
 It's used for combaning "real" data with "mock" values. 
 
 
+#Plans
 
+##Extend queue/streaming services
 
+Right now stairs supports redis (internal implementation) and celery services.
+
+In a near future there is a plan to extend them by some Apache services and more
+"in memory" brokers. 
+
+Right now some experiments ongoing with Kafka.
+
+##Python async
+
+One of the greatest thing about data pipelines is an easy way to scale each step,
+without influence on others. This could be a great opportunity to use async paradigm
+for some pipelines/steps.
+
+Async (asyncio) it's quite powerful tool which helps on solving a lot of task,
+in stairs it will be possible to use it only when needed.
+
+You can define pipeline which should be run in a "async" mode:
+
+```python
+@async_pipeline()
+def pipeline(pipeline, data):
+  result = data.subscribe_flow(MyFlow())
+  
+  # connect none-async pipeline
+  return result.subscribe_pipeline(none_async_pipeline())
+
+``` 
+
+For example, if you define `async_pipeline` all steps inside could be run in
+"async" mode, and you can still connect regular (none-async) pipelines inside
+
+##"Speed and Power" (c) Clarkson
+
+[Like Clarkson](https://youtu.be/KB3RAGSi62c?t=14) Stairs is also believe in
+Speed and Power. One of the main focus is to make stairs as much faster as possible
+so you can process any amount of data you want.  
 
