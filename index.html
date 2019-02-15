@@ -310,6 +310,20 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#plans" class="toc-h1 toc-link" data-title="Plans">Plans</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#extend-queue-streaming-services" class="toc-h2 toc-link" data-title="Extend queue/streaming services">Extend queue/streaming services</a>
+                  </li>
+                  <li>
+                    <a href="#python-async" class="toc-h2 toc-link" data-title="Python async">Python async</a>
+                  </li>
+                  <li>
+                    <a href="#quot-speed-and-power-quot-c-clarkson" class="toc-h2 toc-link" data-title=""Speed and Power" (c) Clarkson">"Speed and Power" (c) Clarkson</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://github.com/electronick1/stairs'>Stairs on github</a></li>
@@ -1220,6 +1234,36 @@ so thats why we aggeread on some mock values and then populate this &quot;mock&q
 <p>Except &quot;flow_generator&quot; all components should return <code>dict</code> like format. Where we have key:value defined.</p>
 
 <p>It&#39;s used for combaning &quot;real&quot; data with &quot;mock&quot; values. </p>
+<h1 id='plans'>Plans</h1><h2 id='extend-queue-streaming-services'>Extend queue/streaming services</h2>
+<p>Right now stairs supports redis (internal implementation) and celery services.</p>
+
+<p>In a near future there is a plan to extend them by some Apache services and more
+&quot;in memory&quot; brokers. </p>
+
+<p>Right now some experiments ongoing with Kafka.</p>
+<h2 id='python-async'>Python async</h2>
+<p>One of the greatest thing about data pipelines is an easy way to scale each step,
+without influence on others. This could be a great opportunity to use async paradigm
+for some pipelines/steps.</p>
+
+<p>Async (asyncio) it&#39;s quite powerful tool which helps on solving a lot of task,
+in stairs it will be possible to use it only when needed.</p>
+
+<p>You can define pipeline which should be run in a &quot;async&quot; mode:</p>
+<pre class="highlight python tab-python"><code><span class="nd">@async_pipeline</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">subscribe_flow</span><span class="p">(</span><span class="n">MyFlow</span><span class="p">())</span>
+
+  <span class="c"># connect none-async pipeline</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">subscribe_pipeline</span><span class="p">(</span><span class="n">none_async_pipeline</span><span class="p">())</span>
+
+</code></pre>
+<p>For example, if you define <code>async_pipeline</code> all steps inside could be run in
+&quot;async&quot; mode, and you can still connect regular (none-async) pipelines inside</p>
+<h2 id='quot-speed-and-power-quot-c-clarkson'>&quot;Speed and Power&quot; (c) Clarkson</h2>
+<p><a href="https://youtu.be/KB3RAGSi62c?t=14">Like Clarkson</a> Stairs is also believe in
+Speed and Power. One of the main focus is to make stairs as much faster as possible
+so you can process any amount of data you want.  </p>
 
       </div>
       <div class="dark-box">
