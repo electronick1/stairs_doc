@@ -136,9 +136,9 @@ For creating default project template just use the following command:
 
 This command will generate a basic project structure with one app inside.<br>
 
-The project has a config file and "manager.py".
+The project has a config file and "manage.py".
 
-"manager.py" - in Django manner allows you to read config, detect apps and 
+"manage.py" - in Django manner allows you to read config, detect apps and 
 execute shell commands.
 
 
@@ -233,12 +233,12 @@ and manipulate.
 Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.
 
 To run pipeline (and let data go through pipeline components) use: <br>
-`python manager.py pipelines:run`
+`python manage.py pipelines:run`
 
 It will run all workers and start process your queue (using streaming/queue service).
 
 If you want to run some particular pipeline use following command: <br>
-`python manager.py pipelines:run app_name.pipeline_name` <br>
+`python manage.py pipelines:run app_name.pipeline_name` <br>
 
 Let's dive a bit deeply to pipelines structure:
 
@@ -712,8 +712,8 @@ So far, We have two types of producer components: <br>
 - worker iterator - the way to safely read your data <br>
 
 
-When you define producer you can call it from shell using manager.py:
-` python manager.py producer:process `
+When you define producer you can call it from shell using manage.py:
+` python manage.py producer:process `
 
 <br><br>
 
@@ -733,7 +733,7 @@ def read_file():
 ### Simple Producer
 
 It's an iterator function which yields data to pipeline. You can run this "producer" from console:<br>
-`python manager.py producer:process`
+`python manage.py producer:process`
 
 It's simply going by all items which producers yields and send them to streaming/queue service which then goes to pipeline. 
 
@@ -770,14 +770,14 @@ using bitmaps to track all your batches status, and the only way when you can lo
 
 Worker producer has two states: first initializing - it's just checking the number of batches and creates all needed meta information. 
 To initilaze worker_producer run: <br>
-`python manager.py producer:init`
+`python manage.py producer:init`
 
 It should be executed only once.
 
 <br>
 
 Then to start reading process you can run: <br>
-`python manager.py producer:process`
+`python manage.py producer:process`
 
 As it was mentioned before worker_producer - it's a parallel way to read your data. So if you want more processes just run the command above multiple times. 
 It will read batches from `producer:init` command.
@@ -827,7 +827,7 @@ Standalone consumer it's a type of consumer which will NOT execute automatically
 
 To execute it and process data inside, you need to run a special command:
 
-`python manager.py consumer:standalone app.write_to_file`
+`python manage.py consumer:standalone app.write_to_file`
 
 
 It useful when you need to write data using one process only (for example in case of file writing).
@@ -964,14 +964,14 @@ Stairs solving all of this problems:
 ## Inspect status of your queues
 
 ```bash
-python manager.py inspect:status app_name
+python manage.py inspect:status app_name
 
 # Queue: cleanup_and_save_localy
 # Amount of jobs: 10000
 # Queue decreasing by 101.0 tasks per/sec
 
 
-python manager.py inspect:monitor app_name
+python manage.py inspect:monitor app_name
 
 # Queue: cleanup_and_save_localy
 # Amount of jobs: 3812
@@ -992,7 +992,7 @@ There is two types of inspections:
 
 
 ```bash
-python manager.py shell
+python manage.py shell
 ```
 
 ```python
@@ -1018,7 +1018,7 @@ It's possible to run all producers, pipelines, consumers using ipython.
 ## Change queue/streaming server
 
 ```python
-# in manager.py 
+# in manage.py 
 
 from stepist import App
 from stairs.services.management import init_cli
@@ -1044,7 +1044,7 @@ and your stairs project is ready to go
 ## Admin panel
 
 ```bash
-python manager.py admin
+python manage.py admin
 ```
 
 It's a way to visualize all your pipelines, see status of queues and all information about each pipeline component
