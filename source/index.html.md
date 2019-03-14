@@ -77,38 +77,38 @@ Each component of data pipeline could be represented as a separate python
 process (worker). Each component comunicates with each other using 
 streaming/queues services and together could process your data in a parallel way.
 
-Right now stairs using: <br>
+Right now stairs is using: <br>
 - celery <br>
 - self-implemented redis queue <br>
 - kafka (under development) <br>
 
-There is interesting wiki article about workers/jobs 
+There is an interesting wiki article about workers/jobs 
 -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
 
-Stairs framework focusing on speed and light, and speed 
-of your "workers" mostly limited by your streaming/queues service.
+The Stairs framework focuses on speed and light, and speed 
+of your "workers" is limited mostly  by your streaming/queues service.
 
 
 ## For data-science and data-engineering with love
 
 <!-- > ![ds_en](images/ds_en.svg) -->
 
-Data-science and data-engineering growing fast, and it's hard 
-to be expert on everything at the same time. 
+Data-science and data-engineering are growing fast, and it's hard 
+to be an expert in everything at the same time. 
 
-For example to train ML models, you should spend about 80% of the time 
-to process data -- how fast you will be able to process your data and test 
-all hypotheses, directly influence your final result.
+For example, to train ML models, you should spend about 80% of your time 
+to process data -- how fast you are able to process your data and test 
+all hypotheses, directly will influence your final result.
 
 Stairs allows data scientist to build "scalable" solutions without 
-high-level data-engineering skills.
+a high level of data-engineering skills.
 
-- Data-scientist could focus only on data processing
-- Data-engineer could focus only on storing and moving data 
+- A data-scientist can focus only on data processing
+- A data-engineer can focus only on storing and moving data 
 (between pipeline components)
 
 
-#Get started
+#Getting started
 
 
 ##Project
@@ -120,16 +120,16 @@ stairs-admin project:new name
 > ![project](images/project.svg)
 
 
-When you done with installation let's try to kick-start your first stairs project.
+When you are done with installation, let's try to kick-starting your first stairs project.
 
-Stairs project kind similar to django approach (when you can create default 
-project template). To have better overview of your components you can create 
-similar project in stairs. It will contain apps with all basic layears inside. <bt>
-But you completely free to use another structure which you want. Default 
-project template is just a way to quikly kick start your idea. 
+The Stairs project is similar to the django approach (when you can create default 
+project template). To have a better overview of your components you can create 
+a similar project with Stairs. It will contain apps with all basic layears inside. <bt>
+But you are completely free to use any other structure which you want. The default 
+project template is just a way to kick-start your idea quikly. 
 
 
-For creating default project template just use the following command:
+To create the default project template just use the following command:
 
 `stairs-admin project:new name`
 
@@ -138,8 +138,9 @@ This command will generate a basic project structure with one app inside.<br>
 
 The project has a config file and "manager.py".
 
-"manager.py" - in Django manner allows you to read config, detect apps and 
-execute shell commands.
+"manager.py" - allows you to read a config, detect apps and execute shell commands 
+in the Django manner.
+
 
 
 <br><br><br><br><br><br>
@@ -156,22 +157,23 @@ stairs-admin app:new name
 > ![app](images/app.svg)
 
 
-App - it's a way to generalize different approaches to one similar form - why? 
-Because right now data-science approaches too scattered and it's hard to 
-understand what's going on when you have a ton of maths and algorithms around. 
+The app is a way to generalize different approaches to one similar form. Why?
+Because right now data-science approaches are too scattered and it's hard to 
+understand what's going on when there are tons of maths and algorithms around.
+
 
 
 Each app has the following components:
 
-- pipeline - represents a data flow graph and determines how the data 
-will be processed. Each pipeline consists of multiple smaller components 
+- pipeline - represents a data flow graph and show how the data 
+will be processed. Each pipeline consists of multiple small components 
 like "Flow" (Data flow).  
 
-- producer - function which helps you to read the source 
+- producer - function which helps you to read a source 
 (file, database ...) and then follow it to data pipeline.
 
-- consumer - function which writes data to data store 
-or change "global state".
+- consumer - function which writes data to the data store 
+or changes "global state".
 
 - flow (Data Flow) - set of functions 
 (called [steps](https://en.wikipedia.org/wiki/Job_(computing))
