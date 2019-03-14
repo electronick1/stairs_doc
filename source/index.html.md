@@ -6,8 +6,6 @@ language_tabs:
 
 toc_footers:
   - <a href='https://github.com/electronick1/stairs'>Stairs on github</a>
-  - <a href='https://github.com/electronick1/stairs_examples'>Stairs examples</a>
-  - <a href='https://github.com/electronick1/stairs_doc'>Stairs doc repo</a>
   - <a href='https://github.com/electronick1/stepist'>Stepist on github</a>
 
 
@@ -16,19 +14,17 @@ search: true
 
 # Welcome
 
-Stairs is a simple tool which allows you to slice and dice and make sense of 
-your data. 
+Stairs is a simple tool which allows you to divide your data into parts and make it understandable. 
 
-You can build data pipelines and make parallel, async or distributed calculations 
-for most of your data related tasks.
+You can build data pipelines, draw parallels and make async or distributed calculations for most of your data related tasks.
 
-Stairs available for Python3, but you can write data processors in any language. 
-You can also use any of streaming or queue services which you want. 
+Stairs is available in Python3, but you can write data processors in any language. 
+You can also use any of streaming or queue services.
 
-It's easy to start, test all your ideas or hypotheses in a quick way and it is 
+It's easy to start. Quickly test all your ideas or hypotheses and everything is 
 ready for immediate use without any special magic. 
 
-Get started with Installation and then get an overview with "Get started". 
+Start with "Installation" and then proceed on to "Getting started". 
 
 # Installation
 
@@ -43,16 +39,16 @@ pip install stairs-project
 
 
 
-> It's recommended to use the latest python 3 version
+> It's recommended to use the latest python 3 version.
 
-Just make `pip install stairs-project` to install stairs along with all 
+Just perform `pip install stairs-project` to install stairs along with all 
 python dependencies.
 
-Stairs requires redis for storing statistic and some meta-information, 
-even if you use different streaming or queue service. 
+Stairs requires Redis for storing statistics and certain meta-information, 
+even if you use a different streaming or queue service. 
 
 <aside class="notice">
-Stairs requires a running redis server to work
+A running Redis server is required for Stairs to work. 
 </aside>
 
 # Mission
@@ -61,54 +57,54 @@ Stairs requires a running redis server to work
 
 <!-- > ![image](images/data_pipeline.png) -->
 
-The main Stairs focus is data pipelines. It's a framework which helps you to
-build and manipulate data through the data flow graph. 
+The main focus of Stairs is data pipelines. It's a framework which helps you to
+build and manipulate data with the help of a data flow graph. 
 
-You can think of it as of an MVP framework (like Django) for data pipelines.
+You can think of it as an MVP framework (like Django) for data pipelines.
 Different layers of abstractions and components allow you to build any kind of 
-data flow graph and easily understand what's going on in your system. 
+data flow graphs and easily understand what's going on in your system. 
 
 
 ## Parallel/Async/Distributed
 
 <!-- > ![parallel](images/parallel.png) -->
 
-Each component of data pipeline could be represented as a separate python 
-process (worker). Each component comunicates with each other using 
-streaming/queues services and together could process your data in a parallel way.
+Each component of the data pipeline can be represented as a separate python 
+process (worker). The components communicate with each other by using 
+streaming/queue services, and together they can process your data in a parallel way.
 
-Right now stairs using: <br>
+Right now Stairs is using: <br>
 - celery <br>
 - self-implemented redis queue <br>
 - kafka (under development) <br>
 
-There is interesting wiki article about workers/jobs 
+There is an interesting article about workers/jobs on wiki
 -> [Wiki](https://en.wikipedia.org/wiki/Job_(computing))
 
-Stairs framework focusing on speed and light, and speed 
-of your "workers" mostly limited by your streaming/queues service.
+The Stairs framework focuses on speed and light, and the speed 
+of your "workers" is limited mostly by your streaming/queue service.
 
 
 ## For data-science and data-engineering with love
 
 <!-- > ![ds_en](images/ds_en.svg) -->
 
-Data-science and data-engineering growing fast, and it's hard 
-to be expert on everything at the same time. 
+Data-science and data-engineering are growing fast, and it's hard 
+to be an expert in everything at the same time. 
 
-For example to train ML models, you should spend about 80% of the time 
-to process data -- how fast you will be able to process your data and test 
-all hypotheses, directly influence your final result.
+For example, to train ML models, you should spend about 80% of your time 
+to process data -- your fast ability to process  data and test 
+all hypotheses will influence your final result.
 
-Stairs allows data scientist to build "scalable" solutions without 
-high-level data-engineering skills.
+Stairs allows a data scientist to build "scalable" solutions without 
+a high level of data-engineering skills.
 
-- Data-scientist could focus only on data processing
-- Data-engineer could focus only on storing and moving data 
-(between pipeline components)
+- A data-scientist can focus only on data processing
+- A data-engineer can focus only on storing and moving data 
+(between the components of the pipeline)
 
 
-#Get started
+#Getting started
 
 
 ##Project
@@ -120,16 +116,16 @@ stairs-admin project:new name
 > ![project](images/project.svg)
 
 
-When you done with installation let's try to kick-start your first stairs project.
+When you are done with installation, let's try kick-starting your first stairs project.
 
-Stairs project kind similar to django approach (when you can create default 
-project template). To have better overview of your components you can create 
-similar project in stairs. It will contain apps with all basic layears inside. <bt>
-But you completely free to use another structure which you want. Default 
-project template is just a way to quikly kick start your idea. 
+The Stairs project is similar to the django approach (when you can create a default 
+project template). To have a better overview of your components, you can create a
+similar project with Stairs. It will consist of apps with all basic layers inside. <bt>
+But you are completely free to use any other structure you want. The default 
+project template is just a way to kick-start your idea quickly. 
 
 
-For creating default project template just use the following command:
+To create a default project template, just use the following command:
 
 `stairs-admin project:new name`
 
@@ -138,8 +134,8 @@ This command will generate a basic project structure with one app inside.<br>
 
 The project has a config file and "manager.py".
 
-"manager.py" - in Django manner allows you to read config, detect apps and 
-execute shell commands.
+"manager.py"  allows you to read a config, detect apps and 
+execute shell commands in the Django manner.
 
 
 <br><br><br><br><br><br>
@@ -156,31 +152,31 @@ stairs-admin app:new name
 > ![app](images/app.svg)
 
 
-App - it's a way to generalize different approaches to one similar form - why? 
-Because right now data-science approaches too scattered and it's hard to 
-understand what's going on when you have a ton of maths and algorithms around. 
+The app is a way to generalize different approaches to one similar form. Why? 
+Because right now data-science approaches are too scattered, and it's hard to 
+understand what's going on, when there are tons of maths and algorithms around. 
 
 
 Each app has the following components:
 
-- pipeline - represents a data flow graph and determines how the data 
-will be processed. Each pipeline consists of multiple smaller components 
+- a pipeline - represents a data flow graph and shows how data 
+will be processed. Each pipeline consists of multiple small components 
 like "Flow" (Data flow).  
 
-- producer - function which helps you to read the source 
-(file, database ...) and then follow it to data pipeline.
+- a producer - a function which helps you to read a source 
+(a file, a database ...) and then directs it to the data pipeline.
 
-- consumer - function which writes data to data store 
-or change "global state".
+- a consumer - a function which writes data to the data store 
+or changes "the global state".
 
-- flow (Data Flow) - set of functions 
+- a flow (Data Flow) - a set of functions 
 (called [steps](https://en.wikipedia.org/wiki/Job_(computing))
-which could change/filter/populate your data.
+which can change/filter/populate your data.
 
 
 
-To create new "default app" structure (with package and modules) 
-type following command:
+To create a new "default app" structure (with a package and modules), 
+type the following command:
 
 `stairs-admin app:new name`
 
@@ -193,10 +189,10 @@ app = App(name="my_app")
 
 ```
 
-To define your app you should initialize App object with name and config 
-(More about app config in "App components" section).
-You can find this app object in "app_config.py" file inside default app. 
-Don't forget to change it name. 
+To define your app, you should initialize an App object with a name and a config 
+(More about the app config in the section "App components").
+You can find this app object in the "app_config.py" file inside the default app. 
+Don't forget to change its name. 
 
 If you want to add a new app to the project, populate 
 `apps` variable in the config file or use `StairsProject().add_app(app)`
@@ -224,23 +220,23 @@ def my_pipeline(pipeline, value):
 
 
 
-Pipeline - it's a way to connect multiple objects (functions/classes/other pipelines) into one big graph. 
+The pipeline is a way to combine multiple objects (functions/classes/other pipelines) in one big graph. 
 
-The way how it's works a bit tricky but quite simple to understand. Input of each pipeline could be any data you want, then
-you can subscribe some objects to this data, and connect more and more objects to one big graph which super easy to understand
+The way it works is a bit tricky, but it's quite simple to understand. The input of each pipeline can be any data you want, then
+you can subscribe some objects to these data and add more and more objects to one big graph, which is super easy to understand
 and manipulate.
 
-Each pipeline component - could be a worker, which communicates with other components through streaming/queue service.
+Each component of the pipeline can be a worker, which communicates with other components through a streaming/queue service.
 
-To run pipeline (and let data go through pipeline components) use: <br>
+To run a pipeline (and let data go through the components of the pipeline ), use: <br>
 `python manager.py pipelines:run`
 
-It will run all workers and start process your queue (using streaming/queue service).
+It will run all the workers and start to process your queue (using a streaming/queue service).
 
-If you want to run some particular pipeline use following command: <br>
+If you want to run a particular pipeline, use the following command: <br>
 `python manager.py pipelines:run app_name.pipeline_name` <br>
 
-Let's dive a bit deeply to pipelines structure:
+Let's dive a bit deeper into the structure of pipelines:
 
 
 <br>
@@ -269,7 +265,7 @@ def full_pipeline(pipeline, value1, value2, value3):
 
     # DataFrame
     result = flow_data_point.subscribe_flow(MyFlow2())\
-                            .rename(result=flow2_result)
+                            .make(result=flow2_result)
 
     return result
 
@@ -283,40 +279,39 @@ def short_pipeline(pipeline, value1, value2, value3):
              .subscribe_func(my_function, as_worker=True)\
              .get("result1")\
              .subscribe_flow(MyFlow2())\
-             .rename(result='result1')\
+             .make(result='result1')\
 
     return result
 
 ```
 
-### Manipulating data inside pipeline
+### Manipulating data inside the pipeline
 
-An input of stairs pipeline is a ["mock"](https://en.wikipedia.org/wiki/Mock_object) values called "DataPoint" - it's a representation of the ANY data which will be executed inside pipeline components. 
+The input of the stairs pipeline is ["mock"](https://en.wikipedia.org/wiki/Mock_object) values called "DataPoint". It's a representation of  ANY data which will be performed inside the components of the pipeline. 
 
-The mock data will be converted to "real" data as soon as you call pipeline: <br>
+The mock data will be converted into "real" data as soon as you call the pipeline: <br>
 
 `short_pipeline(value1=1, value2=2, value3=3)` <br>
 
-But this "real" data will be accesseble only inside functions and flows which you used in subscribe methods.
-(you can't use "real" values directly inside pipeline function - this function it's just for building pipelines, not for data manipulation)
+But this "real" data will be accessible only inside the functions and flows, which you have used in the subscribing methods.
+(you can't use "real" values directly inside the pipeline function - this function is just for building pipelines, not for data manipulation)
 
-You can subscribe DataPoint by some function or Flow component and result of this subscription will be a new object called "DataFrame" 
-(kind of dict object with key:DataPoint structure) - it represents a result of your flow.
+You can subscribe to DataPoint with the help of a certain function or a Flow component, and the result of this subscription will be a new object called "DataFrame" 
+(a kind of the dict object with a key: the DataPoint structure) - it represents the result of your flow.
 
-You could subscribe both DataPoint or DataFrame. But if you want to extract some values from DataFrame (the result of your flow) you can use
+You can subscribe to both DataPoint or DataFrame. But if you want to extract some values from the DataFrame (the result of your flow) you can use the
 `get('value')` method. The result of the "get" method will be DataPoint.
 
-If you want to modify your DataFrame you can use `rename(new_key=old_key)` method and result will be new DataFrame. 
-`rename` methods change the key name (DataPoint inside DataFrame).
+If you want to modify your DataFrame, you can use the `make(value=new_value)` method, and the result will be a new DataFrame.
 
-Now one of the most interesting part: If you want to combine multiple DataPoints and DataFrame into one DataFrame you can use 
-`concatenate(value1=data_point, value2=data_point2)` function - which return DataFrame with defined arguments. 
+Now the most interesting part: if you want to combine multiple DataPoints and DataFrames into one DataFrame, you can use 
+the `concatenate(value1=data_point, value2=data_point2)` function, which returns the DataFrame with defined arguments. 
 
 
-Here an example of the pipeline -> 
+Here is an example of a pipeline -> 
 
-As you can see It's quite simple to define such complex and hard architecture just with 6 lines of code.
-And it's a bit similar to how we define Neural Networks using [Keras](https://keras.io/)
+As you can see, it's quite simple to define such complex architecture just with 6 code lines.
+And it's a bit similar to how we define Neural Networks using [Keras](https://keras.io/).
 
 <br>
 
@@ -335,19 +330,19 @@ def my_pipeline(pipeline, value):
 
 ```
 
-### How pipeline flow change data
+### How the pipeline flow changes data
 
-Pipeline components could accumulate data or completely change/redefine it. 
+The components of the pipeline can accumulate data or completely change/redefine them. 
 
 For this stairs has two definitions: <br>
 - subscribe_smths <br>
 - apply_smths <br>
 
-subscribe - accumulate/update data <br>
-apply - completely redefine data based on pipeline component result. 
+to subscribe - to accumulate/update data <br>
+to apply - to completely redefine data based on the pipeline component result. 
 
-Take into consideration that result of each component is a dict object, which
-"accumulate" by updating dict keys and values
+Take into consideration that the result of each component is a dict object, which
+"accumulates" by updating dict keys and values.
 
 <br><br>
 
@@ -380,19 +375,19 @@ def my_pipeline_with_config(pipeline, value):
 
 ### Call another pipeline
 
-Each stairs pipeline is a worker which handle jobs in a separate process.  
-Inside your pipeline, you can use any other pipelines and send data between
-them using queue/streaming service. 
+Each stairs pipeline is a worker which handles jobs in a separate process.  
+You can use other pipelines inside the pipeline and send data between
+them using a queue/streaming service. 
 
-Note: you can't set worker=False to a pipeline. 
+Note: you can't set the worker=False to the pipeline. 
 
-One of the core feature inside pipelines is a scalable way to configure them. 
-The app and pipelines structure is quite friendly for configuration, 
-you can set new config values when call new pipeline
+One of the core features inside pipelines is a scalable way to configure them. 
+The structure of the app and pipelines is quite friendly to configuration, 
+you can set new config values and then call a new pipeline.
 
 `value.subscribe_pipeline(base_pipeline, config=dict(path='/home'))`
 
-This values will be available inside `base_pipeline` as:
+These values will be available inside `base_pipeline` as:
 
 `pipeline.config.get('path')`
 
@@ -416,14 +411,13 @@ def base_pipeline(pipeline, value):
 
 ```
 
-### Subscribe any function you want
+### Subscribe to any function you want
 
-It's possible to add any function you want inside your data pipeline. 
+It's possible to add any function to your data pipeline. 
 
-If you are using lambda function it's quite important to set name, because otherwise
-if this function will be a worker it will be impossible to recognize it. 
+If you are using the lambda function, it's quite important to set a name, otherwise this function will be a worker, and it will be impossible to recognize it. 
 
-Note: that all functions should return `dict` object.
+Note: all these functions must return the `dict` object.
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
@@ -446,9 +440,9 @@ def base_pipeline(pipeline, value):
 
 ### Custom values
 
-It's possible to add some additional values (with real data) into your pipeline. 
+It's possible to add extra values (with real data) into your pipeline. 
 
-It useful when you want to configure something with constant variables or using
+It is useful if you want to configure something with constant variables or use the
 pipeline config:
 
 `data.add_value(pipeline.config.get('url'))`
@@ -470,30 +464,30 @@ class MyFlow(Flow)
         return dict(second_step_result=first_step_result)
 ```
 
-Flow - It's a low-level component which actually defines data pipeline. 
+The Flow is a low-level component which actually defines the data pipeline. 
 
-The problem with data pipelines builders that's it's not quite easy to 
-change/redefine something, also big amount of functions
-makes pipelines like a hell of dependences (luigi good example of it). <br>
-For solving this problems we have FLOW component which can be used for: <br>
+The problem with data pipelines builders is that it's not quite easy to 
+change/redefine something, also, a great amount of functions
+make pipelines like hell of dependencies (luigi is a good example of it). <br>
+To solve these problems, we have the FLOW component which can be used to: <br>
 
-- Easy change/redefine/extend your pipeline. (Just use python inheretence)
-- Easy to configure 
-- Easy to understand what's going on
-- Each Flow could be a worker - Flow have steps which should be run inside some worker
+- change/redefine/extend your pipeline easily (just use python inheritance)
+- configure easily
+- understand what's going on
+- each Flow can be a worker - the Flow has steps which should be run inside another worker
 
-Flow represents data flow graph as a chain of functions called "steps". You can connect those steps simply define "next step" in decorator:
+The Flow represents a data flow graph as a chain of functions called "steps". You can connect these steps simply by defining the "next step" in the decorator:
 
 `@step(next_step, next_step ... )`
 
-The last step in your graph should be defined with next step set to None.
+The last step in your graph should be defined with the next step set to None.
 
 `@step(None)`
 
 
-All steps executed in one "worker" (process).
+All steps are executed in one "worker" (process).
 
-The structure of `Flow` class actually insperead by [stepist](https://github.com/electoronick1/stepist)
+The structure of the `Flow` class was actually inspired by [stepist](https://github.com/electoronick1/stepist)
 
 ---
 
@@ -514,11 +508,11 @@ class MyFlow(Flow):
    
 ```
 
-The input for the next step is output from the current. 
+The input of the next step is the output from the current. 
 
 This idea is based on [stepist](https://github.com/electronick1/stepist)
 
-Result of each step is accumulating, this means that from any low-level steps 
+The result of each step is accumulation, which means that from any low-level steps 
 you will be able to get values from high-level steps.
 
 <br><br><br><br><br><br><br><br><br><br>
@@ -543,8 +537,8 @@ class MyFlow(Flow):
         pass
 ```
 
-You can define multiple "next" steps and this will allow you to build complex 
-branched out pipelines, like on example bellow ->
+You can define multiple "next" steps, and this will allow you to build complex 
+branchy pipelines, like in the example below ->
 
 ![image](images/flow1.svg)
 <br><br><br><br><br>
@@ -573,10 +567,10 @@ class MyFlow(Flow):
             
 ```
 
-Now, to execute your flow class you should have `__call__` method defenied. 
+Now, to execute your flow class, you should define the `__call__` method. 
 
-Inside `__call__` you can execute any step from your flow. Then whole chain 
-(pipeline) of steps will be executed. 
+Inside the `__call__`, you can execute any step from your flow. Then the whole chain 
+(a pipeline) of steps will be executed. 
 
 `self.mystep(**kwargs_for_highest_step)`
 
@@ -609,8 +603,8 @@ class MyFlow(Flow):
         return dict(power2=value ** 2)
 ```
 
-It's also possible to customize steps which should return back result data. 
-Just set `save_result` flag to True. 
+It's also possible to customize steps, which should return the data result back. 
+Just set the `save_result` flag to True. 
 
 <br><br><br>
 
@@ -645,9 +639,9 @@ class MyFlow2(MyFlow):
 ```
 
 
-Flow - it's a class, this means we could use inheritance to redefine some steps logic.
+The flow is a class, which means that we can use inheritance to redefine the logic of certain steps.
 
-It's a very powerfull way to extend/change your data pipeline. 
+It's a very powerful way to extend/change your data pipeline.
 
 <br><br>
 
@@ -685,9 +679,9 @@ class MyFlow2(MyFlow):
         return dict(power4=value ** 4)
 ```
 
-Inheritance also allows you to reconnect some steps and change Flow structure.
+The inheritance also allows you to reconnect certain steps and change the Flow structure.
 
-It's possible to add a new step to the top, insert in the middle or add "save_result" flag.
+It's possible to add a new step to the top, insert it in the middle or add the "save_result" flag.
 
 <br><br>
 
@@ -700,19 +694,19 @@ It's possible to add a new step to the top, insert in the middle or add "save_re
 
 ## Producer
 
-Producer - it's a set of components for reading any types of data and then call pipeline to handle your data.
+The producer is a set of components for reading any type of data and then for calling a pipeline to handle your data.
 
-This component will populate your pipeline by "real" data which you can read from any source you want. 
-
-
-
-So far, We have two types of producer components: <br>
-
-- simple iterator <br>
-- worker iterator - the way to safely read your data <br>
+This component will populate your pipeline with "real" data which you can read from any source.
 
 
-When you define producer you can call it from shell using manager.py:
+
+So far, we have two types of the producer components: <br>
+
+- a simple iterator <br>
+- a worker iterator - a way to read your data safely <br>
+
+
+When you defined the producer, you can call it from the shell using manager.py:
 ` python manager.py producer:process `
 
 <br><br>
@@ -732,12 +726,12 @@ def read_file():
 
 ### Simple Producer
 
-It's an iterator function which yields data to pipeline. You can run this "producer" from console:<br>
+It's a function of the iterator which yields data to the pipeline. You can run this "producer" from the console:<br>
 `python manager.py producer:process`
 
-It's simply going by all items which producers yields and send them to streaming/queue service which then goes to pipeline. 
+It simply goes through all the items that the producer yields and sends them to the streaming/queue service, which then goes to the pipeline. 
 
-To prevent overfitting of your streaming service you can set "limit" and at the moment when producer reaches this limit it will sleep for a while. 
+To prevent overfitting of your streaming service, you can set a "limit". When the producer reaches this limit, it will sleep for a while. 
 
 <br><br><br>
 
@@ -761,28 +755,28 @@ def read_batch(batch_id):
 
 ### Worker Producer
 
-It's a parallel/distributed way to populate your pipeline with data. It's almost 99% safe - it has smart features to prevent data loss or duplication.
+It's a parallel/distributed way to populate your pipeline with data. It's almost 99% safe, as it has smart features to prevent data loss or duplication.
 
-The way how it works a bit complex then simple producer, but if you know something about "batch" processing - everything will be simple for you.
+The way it works is a bit more complicated then the way the simple producer works, but if you know something about "batch" processing, everything will be simple to you.
 
-The idea to split your data by batches and read each batch independently. If the whole batch was read successfully it goes to pipeline. Internally Worker producer
-using bitmaps to track all your batches status, and the only way when you can lose your data is a fail with redis.
+The idea is to split your data into batches and read each batch independently. If the whole batch is read successfully, it goes to the pipeline. Internally, the worker producer
+uses bitmaps to track the status of all your batches, and the only way you can lose your data is a fail with the redis.
 
-Worker producer has two states: first initializing - it's just checking the number of batches and creates all needed meta information. 
-To initilaze worker_producer run: <br>
+The worker producer has two states: the first  is initializing. It checks the number of batches and creates all necessary meta information. 
+To initilaze the worker_producer, run: <br>
 `python manager.py producer:init`
 
-It should be executed only once.
+It must be executed only once.
 
 <br>
 
-Then to start reading process you can run: <br>
+To start reading the process, you can run: <br>
 `python manager.py producer:process`
 
-As it was mentioned before worker_producer - it's a parallel way to read your data. So if you want more processes just run the command above multiple times. 
-It will read batches from `producer:init` command.
+As it was mentioned earlier, the worker_producer is a parallel way to read your data. So, if you want more processes, just run the command above multiple times. 
+It will read batches from the `producer:init` command.
 
-In the same way like simple_producer it will prevent the queue from overfitting. 
+It will prevent the queue from overfitting, similar to the simple_producer. 
 
 <br><br><br>
 
@@ -794,17 +788,17 @@ def save_to_redis(**data):
     redis.set(json.dumps(data))
 ```
 
-Consumer - it's a set of components for writing/saving your data to any type of store or change the global state of your system.
+The consumer is a set of components for writing/saving your data to any type of store or for changing the global state of your system.
 
-You are free to write/save your data inside Flow component, but consumer it's not only about saving - it's a way to accumulate all
-data to one place, and stairs has 3 types of consumers:
+You are free to write/save your data inside the Flow component, but the consumer is not only about saving. It is also a way to accumulate all
+data to one place, and Stairs has 3 types of consumers:
 
-- "simple consumer" - just a simple function which should not return any data. Useful for saving data to data store.
-- "standalone_consumer" - function which could be called as a separate process. Useful for writing data to a file or accumulating it inside one process for something. 
-- "consumer_iter" - function which yields data from the pipeline. Useful when you want to train the neural network and needs data generator. 
+- "a simple consumer" is a simple function which should not return any data. It's useful for saving data to the data store.
+- "standalone_consumer" is a function which can be called as a separate process. It's useful for writing data to a file or for accumulating them inside one process. 
+- "consumer_iter" is a function which yields data from the pipeline. It's useful when you want to train the neural network. It also needs data generator. 
 
 
-Here on the right example of "simple consumer" -> 
+Here, on the right, is an example of "a simple consumer" -> 
 <br><br>
 
 
@@ -823,14 +817,14 @@ def write_to_file(**data):
 ```
 
 
-Standalone consumer it's a type of consumer which will NOT execute automatically.
+The Standalone consumer is a type of a consumer which will NOT execute automatically.
 
 To execute it and process data inside, you need to run a special command:
 
 `python manager.py consumer:standalone app.write_to_file`
 
 
-It useful when you need to write data using one process only (for example in case of file writing).
+It is useful if you need to write data using one process only (for example, in the case of file writing).
  
 
 --- 
@@ -869,10 +863,10 @@ keras.Model().fit(x=x_data_for_nn(),
 ```
 
 
-Consumer as a separe process.
+The Consumer as a separe process.
 
-If you want to train a neural network, and use an output of your pipeline as a train set, you can use:<br>
-`@consumer_iter()` component which allows you to read data from streaming/queue service directly to your function.
+If you want to train the neural network and use the output from your pipeline as a train set, you can use:<br>
+The `@consumer_iter()` component allows you to read data from the streaming/queue service directly to your function.
 
 
 
@@ -908,11 +902,11 @@ app.config.use_validation = True
 
 ```
 
-It's a place when you can set up your app. 
+It's a place where you can set up your app. 
 
-App config allows defining app settings which useful when you want to share your app with the world.
+The App config allows defining the app settings, which are useful if you want to share your app with the world.
 
-Here it's also possible to define pipeline config like on example -> 
+It's also possible to define the pipeline config as in the example -> 
 
 <br>
 
@@ -924,17 +918,17 @@ Here it's also possible to define pipeline config like on example ->
 
 [github hacker_news](https://github.com/electronick1/stairs_examples/tree/master/hacker_news)<br>
 
-The idea here is to extract data from some source (in that case google cloud), change it somehow and save in a elegant format 
-(for example for creating charts then, or building neural networks).
+The idea here is to extract data from a certain source (in this case it's google cloud), to change them somehow and save them in a elegant format 
+(for example, for creating charts later or for building neural networks).
 
-You can start exploring this project from `producers.py` inside hacker_new app. 
-In this module it's quite trivial where we are reading data, and what format we are using as a result
+You can start exploring this project from `producers.py` inside the hacker_new app. 
+It's quite insignificant where we read data in this module, and what format we use as a result.
 
-Then `pipelines.py` each producer will send data to pipelines, in our case we have two of them:<br>
-- `cleanup_and_save_localy` - which makes basic text cleanup and filtering
-- `calculate_stats` - which based on "clean" data calculates some stats which we need
+Then each producer of `pipelines.py` will send data to the pipelines, in our case we have two of them:<br>
+- `cleanup_and_save_localy` - makes a basic text cleanup and filtering
+- `calculate_stats` -  based on "clean" data, it calculates stats we need
 
-Next (and last) `consumers.py` - the place where all data comes in the end of pipeline.
+The next (and the last) `consumers.py` - a place where all data come at the end of the pipeline.
 
 <br>
 
@@ -942,26 +936,26 @@ Next (and last) `consumers.py` - the place where all data comes in the end of pi
 
 [github bag of words](https://github.com/electronick1/stairs_examples/tree/master/bag_of_words)<br>
 
-He we trying to teach some neural network to solve [kaggle task "Bag of Words Meets Bags of Popcorn"](https://www.kaggle.com/c/word2vec-nlp-tutorial)
+Here, we try teaching the neural network to solve [kaggle task "Bag of Words Meets Bags of Popcorn"](https://www.kaggle.com/c/word2vec-nlp-tutorial)
 
-This example based on [this repo](https://github.com/wendykan/DeepLearningMovies/) And it's kind of copy-paste solution but to the much more better representation.
+This example is based on [this repo](https://github.com/wendykan/DeepLearningMovies/), and it's a kind of the copy-paste solution, but for much better representation.
 
-What does it means "better representation"? 
+What does "better representation" mean? 
 
-If you look inside this repo, it's just a plain code, 
-when you want to make calculations in parrallel way it's not very trivial todo, 
-also if you wnt to change something it's not easy to undestand whole data flow chages.
+If you look inside this repo, it's just a plain code. 
+If you want to make calculations in a parallel way, it's not very trivial to do.
+Also, if you want to change something, it's not easy to undestand all the changes of the data flow.
 
-Stairs solving all of this problems:
+Stairs solves all these problems:
 
-- It make calculations in parallel by default
-- You can easelly understand what's going on inside `pipelines.py`
-- It super easy to change something (just redefine some methods in FLow clases)
+- It makes calculations in the parallel by default
+- You can easily understand what's going on inside the `pipelines.py`
+- It is super easy to change something (just redefine certain methods in the FLow classes).
 
 
 #Features 
 
-## Inspect status of your queues
+## Inspect the status of your queues
 
 ```bash
 python manager.py inspect:status app_name
@@ -981,10 +975,10 @@ python manager.py inspect:monitor app_name
 
 ```
 
-There is two types of inspections:
+There are two types of inspection:
 
-- inspect:status - return current amount of jobs/tasks in your queue, and basic information about speed (not very accurate)
-- inspect:monitor - return amount jobs added and processed per sec. Accurate, but working only for redis (so far)
+- inspect:status - returns the current amount of jobs/tasks in your queue and basic information about the speed (not very accurate)
+- inspect:monitor - returns the amount of jobs added and processed per sec. It's accurate, but works only for the redis (so far)
 
 
 ## Shell
@@ -1015,7 +1009,7 @@ In [5]: producer.process()
 It's possible to run all producers, pipelines, consumers using ipython.
 
 
-## Change queue/streaming server
+## Change the queue/streaming server
 
 ```python
 # in manager.py 
@@ -1035,8 +1029,8 @@ if __name__ == "__main__":
 ```
 
 
-Stairs is complitely based on stepist. You can just define new stepist app with new "broken" engine, 
-and your stairs project is ready to go 
+Stairs is based completely on stepist. You can just define a new stepist app with a new "broken" engine, 
+and your stairs project is ready to go. 
 
 [Stepist](https://github.com/electronick1/stepist)
 
@@ -1047,7 +1041,7 @@ and your stairs project is ready to go
 python manager.py admin
 ```
 
-It's a way to visualize all your pipelines, see status of queues and all information about each pipeline component
+It's a way to visualize all your pipelines, to see the status of queues and information about each component of the pipeline.
 
 
 ![image](images/admin.png)
@@ -1059,7 +1053,7 @@ Under development
 #FAQ
 
 
-## What the reason behind apps?
+## What is the reason behind apps?
 
 ```python
 
@@ -1088,74 +1082,36 @@ def my_pipeline(pipeline, value):
 
 ```
 
-The main idea is to simplify reusing externall solutions.
+The main idea is to simplify reusing external solutions.
 
-Data-Science world right now is very none standardized and stairs trying to create enviroment
-where reusing someone approache will be easy and scalable for you. 
+The Data-Science world is non-standardized right now, and stairs is trying to create the enviroment
+where reusing someone's approach will be easy and scalable for you. 
 
-For example each app has a config, It's allow you to set different config variables to external apps (inside your app/project).
+For example, each app has a config. It allows you to set different config variables to external apps (inside your app/project).
 
-Each pipeline has a config. It's allow you to redefine some pipeline components or change any logic you want. 
+Each pipeline has a config. It allows you to redefine certain components of the pipeline or change any logic you want. 
 
-One of the good example of configs it's [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/app_config.py) 
+A good example of configs is [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/app_config.py) 
 or [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/pipelines.py#L13)
 
 
 
-## Why pipeline builder using "mocked" data ?
+## Why does the pipeline builder use "mocked" data ?
 
-Pipeline builder `app.pipeline()` exists only for creating pipeline, configure it, 
-and return "Worker" object which then will be executed using streaming/queue service. 
+The pipeline builder `app.pipeline()` exists only to create a pipeline, to configure it, 
+and return the "Worker" object which then will be executed by using a streaming/queue service. 
 
-At the moment when we are building pipeline, we don't know nothing about real data which comes to it latter, 
-so thats why we aggeread on some mock values and then populate this "mock" values from producer (or other pipeline).
-
-
-## What data should return each pipeline component ?
-
-Except "flow_generator" all components should return `dict` like format. Where we have key:value defined.
-
-It's used for combaning "real" data with "mock" values. 
+At the moment we are building a pipeline, we know nothing about real data. Due to this fact, we use certain mock objects. When you run the producer, it will populate these 'mock' objects, and the components of the pipeline will work with real data.
 
 
-#Plans
+## What should data return to each component of the pipeline?
 
-##Extend queue/streaming services
+Except the "flow_generator", all components must return `dict` as a result. Where we have key:value defined.
 
-Right now stairs supports redis (internal implementation) and celery services.
 
-In a near future there is a plan to extend them by some Apache services and more
-"in memory" brokers. 
+It's used for combining "real" data with "mock" values. 
 
-Right now some experiments ongoing with Kafka.
 
-##Python async
 
-One of the greatest thing about data pipelines is an easy way to scale each step,
-without influence on others. This could be a great opportunity to use async paradigm
-for some pipelines/steps.
 
-Async (asyncio) it's quite powerful tool which helps on solving a lot of task,
-in stairs it will be possible to use it only when needed.
-
-You can define pipeline which should be run in a "async" mode:
-
-```python
-@async_pipeline()
-def pipeline(pipeline, data):
-  result = data.subscribe_flow(MyFlow())
-  
-  # connect none-async pipeline
-  return result.subscribe_pipeline(none_async_pipeline())
-
-``` 
-
-For example, if you define `async_pipeline` all steps inside could be run in
-"async" mode, and you can still connect regular (none-async) pipelines inside
-
-##"Speed and Power" (c) Clarkson
-
-[Like Clarkson](https://youtu.be/KB3RAGSi62c?t=14) Stairs is also believe in
-Speed and Power. One of the main focus is to make stairs as much faster as possible
-so you can process any amount of data you want.  
 
