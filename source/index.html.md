@@ -274,6 +274,19 @@ It will run all the workers and start to process your jobs queue.
 If you want to run a particular pipeline, use the following command: <br>
 `python manage.py pipelines:run app_name.pipeline_name` <br>
 
+<br>
+The Pipelines not calling producers to get some data, you should put 
+data to pipelines manually.
+
+You have at least three ways to populate/execute your pipeline with data:
+
+- Run the Stairs producers (producer component section for more details)
+- Execute one pipeline from another 
+- Add data to pipeline from none-python env/lang, using queue/streaming
+service, just pull some jobs to `pipeline.get_queue_name()` queue
+
+
+
 Let's dive a bit deeper into the structure of pipelines:
 
 
@@ -494,6 +507,11 @@ It's possible to add any function to your data pipeline.
 
 If you are using the lambda function, it's quite important to set a name ( 
 otherwise if function will be a worker it will be impossible to recognize it)
+
+The Stairs also allows you to "produce" some data during pipeline execution. For
+this you can use `.subscribe_func_as_producer` or `.subscribe_flow_as_producer`
+this components should return generator (e.g. list) and Stairs will add this 
+batch of jobs to next component one by one.
 
 Note: all these functions must return the `dict` object. And all communication
 between stairs components happens using dict's.
@@ -845,62 +863,115 @@ When the producer reaches this limit, it will sleep for a while.
 
 ```python
 
-@app.batch_producer(pipeline.my_pipeline)
-def read_database():
-    for i in range(AMOUNT_OF_ROWS / BATCH_SIZE):
-        yield read_batch(i)
-
+@app.producer()
 def read_batch(batch_id):
     interval = (batch_id*BATCH_SIZE, (batch_id+1)*BATCH_SIZE)
     cursor.execute("SELECT * FROM table where id>%s and id<%s" % interval)
     for row in cursor:
         yield row
 
+
+@app.batch_producer(read_batch)
+def read_database():
+    for i in range(AMOUNT_OF_ROWS / BATCH_SIZE):
+        yield dict(batch_id=i)
+
 ```
 
-### Worker Producer
+### Batch Producer
 
-It's a parallel/distributed way to populate your pipeline with data. It's almost 99% safe, as it has smart features to prevent data loss or duplication.
+It's a parallel/distributed way to read data in batches. 
 
-The way it works is a bit more complicated then the way the simple producer works, but if you know something about "batch" processing, everything will be simple to you.
 
-The idea is to split your data into batches and read each batch independently. If the whole batch is read successfully, it goes to the pipeline. Internally, the worker producer
-uses bitmaps to track the status of all your batches, and the only way you can lose your data is a fail with the redis.
+The way it works is a bit more complicated then the way the simple producer 
+works, but if you know something about "batch" processing, everything will 
+be simple to you.
 
-The worker producer has two states: the first  is initializing. It checks the number of batches and creates all necessary meta information. 
-To initilaze the worker_producer, run: <br>
-`python manager.py producer:init`
+The idea is to split your data into batches and read each batch independently. 
+If the whole batch is read successfully, it goes to the pipeline (in case of redis
+queue with one transaction, in case of others - one by one). 
 
-It must be executed only once.
+To start reading process simply run:
+`python manage.py producer:run batch_producer_name`
 
-<br>
+It will start pulling data to "iter producer". Then you should execute "iter
+producer" start reading each batch independently:
+`python manage.py producer:run_jobs`
 
-To start reading the process, you can run: <br>
-`python manager.py producer:process`
+You can run multiple of this ^ processes and make batch reading more fast.
 
-As it was mentioned earlier, the worker_producer is a parallel way to read your data. So, if you want more processes, just run the command above multiple times. 
-It will read batches from the `producer:init` command.
+To prevent queue overfitting you can specify queue_limit in producer params.
 
-It will prevent the queue from overfitting, similar to the simple_producer. 
 
 <br><br><br>
 
+
+### Spark Producer
+
+```python
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
+
+sc = SparkContext(appName="app")
+
+@app.spark_producer(pipeline)
+def read_json_files():
+  spark = SparkSession \
+      .builder\
+      .getOrCreate()
+      
+  f = sc.textFile("test.row_json", 10)
+  df = spark.read.json(f)
+  
+  return df
+```
+
+The Spark producer is a way to read your data using spark power and then pull 
+everything to the Stairs pipelines. 
+
+Spark has powerful features to read data in fast parallel way and it could be helpful
+when you want to read big amount of data, filter it and process using Stairs pipelines.
+
+In the background Stairs iterates over each partition, create connection to your
+queue/streaming service and add job one by one to a queue. Checkout internal 
+implementation [here]()
+
+To run spark producer you should run following command:
+`python manage.py producer:run spark_producer_name`
+
+It will start executing Spark context and pull data to pipelines. 
+ 
 ## Consumer
 
 ```python
 @app.consumer()
 def save_to_redis(**data):
     redis.set(json.dumps(data))
+    
+    
+@app.pipeline()
+def aggregate_smth(pipeline, value):
+    return value.subscribe_consumer(save_to_redis)
 ```
 
-The consumer is a set of components for writing/saving your data to any type of store or for changing the global state of your system.
+The consumer is a set of components for writing/saving your data to any type 
+of store or for changing the global state of your system.
 
-You are free to write/save your data inside the Flow component, but the consumer is not only about saving. It is also a way to accumulate all
+You are free to write/save your data inside the Flow components, 
+but the consumer is not only about saving. It is also a way to accumulate all
 data to one place, and Stairs has 3 types of consumers:
 
-- "a simple consumer" is a simple function which should not return any data. It's useful for saving data to the data store.
-- "standalone_consumer" is a function which can be called as a separate process. It's useful for writing data to a file or for accumulating them inside one process. 
-- "consumer_iter" is a function which yields data from the pipeline. It's useful when you want to train the neural network. It also needs data generator. 
+- "a simple consumer" is a simple function which should not return any data. 
+It's useful for saving data to the data store.
+- "standalone_consumer" is a function which can be called as a separate process. 
+It's useful for writing data to a file or for accumulating them inside one process. 
+- "consumer_iter" is a function which yields data from the pipeline. 
+It's useful when you want to train e.g. the neural network. It is plays role of 
+data generator/iterator.  
+
+Consumer do NOT apply any changes to the data, when you subscribe it to your data
+it will execute in the background without any influence to your pipeline data.
+It's also possible to run consumers as a "workers". 
 
 
 Here, on the right, is an example of "a simple consumer" -> 
@@ -922,14 +993,16 @@ def write_to_file(**data):
 ```
 
 
-The Standalone consumer is a type of a consumer which will NOT execute automatically.
+The Standalone consumer is a type of a consumer which will NOT 
+execute automatically.
 
 To execute it and process data inside, you need to run a special command:
 
-`python manager.py consumer:standalone app.write_to_file`
+`python manage.py consumer:standalone app.write_to_file`
 
 
-It is useful if you need to write data using one process only (for example, in the case of file writing).
+It is useful if you need to write data using one process only 
+(for example, in the case of file writing).
  
 
 --- 
@@ -938,17 +1011,13 @@ It is useful if you need to write data using one process only (for example, in t
 ```python
 
 @app.consumer_iter()
-def x_data_for_nn(**data):
-    return data
-
-@app.consumer_iter()
-def y_data_for_nn(**data):
-    return data
+def train_data_for_nn(x, y):
+    return dict(x=x, y=y)
 
 
 # Example of pipeline
 @app.pipeline()
-def prepare_data_for_nn(pipeline, data)
+def prepare_data_for_nn(pipeline, data):
     result_data = data.subscribe_flow(Flow())
 
     x_consumer = result_data.get('x')\
@@ -956,22 +1025,20 @@ def prepare_data_for_nn(pipeline, data)
     y_consumer = result_data.get('y')\
                             .subscribe_consumer(y_data_for_nn)
 
-    return concatinate(x=x_consumer, y=y_consumer)
+    return concatenate(x=x_consumer, y=y_consumer)
 
 
-if __name__ == "__main__"
+if __name__ == "__main__":
 
-keras.Model().fit(x=x_data_for_nn(),
-                  y=y_data_for_nn())
+keras.Model().fit_generator(train_data_for_nn())
 
 
 ```
 
 
-The Consumer as a separe process.
-
-If you want to train the neural network and use the output from your pipeline as a train set, you can use:<br>
-The `@consumer_iter()` component allows you to read data from the streaming/queue service directly to your function.
+The `@consumer_iter()` component allows you to read data directly from the 
+streaming/queue service. You can iterate data which was passed to consumer from
+any place you want. 
 
 
 
@@ -1007,9 +1074,13 @@ app.config.use_validation = True
 
 ```
 
-It's a place where you can set up your app. 
+It's a place where you can setup your app. 
 
-The App config allows defining the app settings, which are useful if you want to share your app with the world.
+The App config allows defining the app settings, which are useful 
+if you want to share your app with the world.
+
+You can use `@app.on_app_created` signal to catch event when app will 
+be ready to use.  
 
 It's also possible to define the pipeline config as in the example -> 
 
@@ -1023,17 +1094,19 @@ It's also possible to define the pipeline config as in the example ->
 
 [github hacker_news](https://github.com/electronick1/stairs_examples/tree/master/hacker_news)<br>
 
-The idea here is to extract data from a certain source (in this case it's google cloud), to change them somehow and save them in a elegant format 
+The idea here is to extract data from a certain source (in this case it's 
+google cloud), to change them somehow and save them in a elegant format 
 (for example, for creating charts later or for building neural networks).
 
-You can start exploring this project from `producers.py` inside the hacker_new app. 
-It's quite insignificant where we read data in this module, and what format we use as a result.
+You can start exploring this project from `producers.py` 
+inside the hacker_new app. <br>
 
-Then each producer of `pipelines.py` will send data to the pipelines, in our case we have two of them:<br>
+Each producer will send data to the pipelines, in our case we have two of them:<br>
 - `cleanup_and_save_localy` - makes a basic text cleanup and filtering
 - `calculate_stats` -  based on "clean" data, it calculates stats we need
 
-The next (and the last) `consumers.py` - a place where all data come at the end of the pipeline.
+The next (and the last) `consumers.py` - a place where all data come at the end 
+of the pipeline and aggregated in redis. 
 
 <br>
 
@@ -1041,15 +1114,18 @@ The next (and the last) `consumers.py` - a place where all data come at the end 
 
 [github bag of words](https://github.com/electronick1/stairs_examples/tree/master/bag_of_words)<br>
 
-Here, we try teaching the neural network to solve [kaggle task "Bag of Words Meets Bags of Popcorn"](https://www.kaggle.com/c/word2vec-nlp-tutorial)
+Here, we try teaching the neural network to solve 
+[kaggle task "Bag of Words Meets Bags of Popcorn"](https://www.kaggle.com/c/word2vec-nlp-tutorial)
 
-This example is based on [this repo](https://github.com/wendykan/DeepLearningMovies/), and it's a kind of the copy-paste solution, but for much better representation.
+This example is based on [this repo](https://github.com/wendykan/DeepLearningMovies/),
+and it's a kind of the copy-paste solution, but for much better representation.
 
 What does "better representation" mean? 
 
 If you look inside this repo, it's just a plain code. 
-If you want to make calculations in a parallel way, it's not very trivial to do.
-Also, if you want to change something, it's not easy to undestand all the changes of the data flow.
+If you want to make calculations in a parallel way, it's not very trivial task to do.
+Also, if you want to change something, it's not easy to undestand
+all the changes of the data flow.
 
 Stairs solves all these problems:
 
@@ -1063,14 +1139,14 @@ Stairs solves all these problems:
 ## Inspect the status of your queues
 
 ```bash
-python manager.py inspect:status app_name
+python manage.py inspect:status app_name
 
 # Queue: cleanup_and_save_localy
 # Amount of jobs: 10000
 # Queue decreasing by 101.0 tasks per/sec
 
 
-python manager.py inspect:monitor app_name
+python manage.py inspect:monitor app_name
 
 # Queue: cleanup_and_save_localy
 # Amount of jobs: 3812
@@ -1082,8 +1158,10 @@ python manager.py inspect:monitor app_name
 
 There are two types of inspection:
 
-- inspect:status - returns the current amount of jobs/tasks in your queue and basic information about the speed (not very accurate)
-- inspect:monitor - returns the amount of jobs added and processed per sec. It's accurate, but works only for the redis (so far)
+- inspect:status - returns the current amount of jobs/tasks in your queue 
+and basic information about the speed (not very accurate)
+- inspect:monitor - returns the amount of jobs added and processed per sec. 
+It's accurate, but works only for the redis (so far)
 
 
 ## Shell
@@ -1091,7 +1169,7 @@ There are two types of inspection:
 
 
 ```bash
-python manager.py shell
+python manage.py shell
 ```
 
 ```python
@@ -1117,7 +1195,7 @@ It's possible to run all producers, pipelines, consumers using ipython.
 ## Change the queue/streaming server
 
 ```python
-# in manager.py 
+# in manage.py 
 
 from stepist import App
 from stairs.services.management import init_cli
@@ -1134,8 +1212,8 @@ if __name__ == "__main__":
 ```
 
 
-Stairs is based completely on stepist. You can just define a new stepist app with a new "broken" engine, 
-and your stairs project is ready to go. 
+Stairs is based completely on stepist. You can just define a new stepist app 
+with a new "broken" engine and your stairs project is ready to go. 
 
 [Stepist](https://github.com/electronick1/stepist)
 
@@ -1143,10 +1221,11 @@ and your stairs project is ready to go.
 ## Admin panel
 
 ```bash
-python manager.py admin
+python manage.py admin
 ```
 
-It's a way to visualize all your pipelines, to see the status of queues and information about each component of the pipeline.
+It's a way to visualize all your pipelines, to see the status of queues and
+information about each component of the pipeline.
 
 
 ![image](images/admin.png)
@@ -1187,14 +1266,16 @@ def my_pipeline(pipeline, value):
 
 ```
 
-The main idea is to simplify reusing external solutions.
+The main idea is to simplify process of reusing external solutions.
 
-The Data-Science world is non-standardized right now, and stairs is trying to create the enviroment
-where reusing someone's approach will be easy and scalable for you. 
+The Data-Science world is non-standardized right now, and stairs is 
+trying to create the enviroment where reusing someone's approach will 
+be easy and scalable for you. 
 
-For example, each app has a config. It allows you to set different config variables to external apps (inside your app/project).
-
-Each pipeline has a config. It allows you to redefine certain components of the pipeline or change any logic you want. 
+For example, each app and pipeline has a config. App config allows you to set 
+different config variables to external apps (inside your app/project). Pipelines
+config allows you to redefine certain components of the pipeline or change any
+logic you want. 
 
 A good example of configs is [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/app_config.py) 
 or [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_words/word2vec/pipelines.py#L13)
@@ -1203,17 +1284,22 @@ or [here](https://github.com/electronick1/stairs_examples/blob/master/bag_of_wor
 
 ## Why does the pipeline builder use "mocked" data ?
 
-The pipeline builder `app.pipeline()` exists only to create a pipeline, to configure it, 
-and return the "Worker" object which then will be executed by using a streaming/queue service. 
+The pipeline builder `app.pipeline()` exists only to create a pipeline,
+to configure it, and return the "Worker" object which then will be executed
+by using a streaming/queue service. 
 
-At the moment we are building a pipeline, we know nothing about real data. Due to this fact, we use certain mock objects. When you run the producer, it will populate these 'mock' objects, and the components of the pipeline will work with real data.
+At the moment we are building a pipeline, we know nothing about 
+real data. Due to this fact, we use certain mock objects. When you run the producer,
+it will populate these 'mock' objects, and the components of the pipeline 
+will work with real data.
 
 
-## What should data return to each component of the pipeline?
+## What data should return each component of the pipeline?
 
-Except the "flow_generator", all components must return `dict` as a result. Where we have key:value defined.
+Except the "flow_producer"/"func_producer", all components must return `dict` 
+as a result. Where we have key:value defined.
 
-Right now stairs supports redis (internal implementation) and celery services.
+Right now stairs supports redis (internal implementation), RMQ and SQS services.
 
 It's used for combining "real" data with "mock" values. 
 
