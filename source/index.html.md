@@ -140,10 +140,13 @@ To create a default project template, just use the following command:
 
 This command will generate a basic project structure with one app inside.<br>
 
+The project has a config file and "manage.py".
 The project has a config file and "manage.py" module. <br>
 `manage.py` it's a starting point to control everything inside stairs.
 It allows you to read a config, detect apps and execute different commands.
 
+"manage.py" - in Django manner allows you to read config, detect apps and 
+execute shell commands.
 
 ```python
 from stairs import get_project
@@ -551,7 +554,7 @@ pipeline config:
 
 
 ```python
-class MyFlow(Flow)
+class MyFlow(Flow):
     @step(None)
     def first_step(self, value):
         return dict(first_step_result=value)

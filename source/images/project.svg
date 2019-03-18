@@ -15,7 +15,7 @@
                 <tspan x="79" y="147">config.py</tspan>
             </text>
             <text id="manager.py" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#FFFFFF">
-                <tspan x="69" y="187">manager.py</tspan>
+                <tspan x="69" y="187">manage.py</tspan>
             </text>
         </g>
     </g>
