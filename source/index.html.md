@@ -1297,7 +1297,7 @@ it will populate these 'mock' objects, and the components of the pipeline
 will work with real data.
 
 
-## What should data return to each component of the pipeline?
+## What data should return each component of the pipeline?
 
 Except the "flow_producer"/"func_producer", all components must return `dict` 
 as a result. Where we have key:value defined.
